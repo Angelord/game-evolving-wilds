@@ -10,7 +10,7 @@ namespace EvolvingWilds {
 		public int InitialSpawn;	// How many are spawned initially
 		public float MinSpawnRate;
 		public float MaxSpawnRate;
-		public GameObject Vegetable;
+		public GameObject[] prefabs;
 
 		private World _world;
 		private float _nextSpawn;
@@ -36,19 +36,11 @@ namespace EvolvingWilds {
 
 		private void Spawn() {
 
-			Vector2 pos = RandomSpawnPos();
+			Vector2 pos = _world.RandomPosition();
 
-			Instantiate(Vegetable, pos, Quaternion.identity);
+			Instantiate(prefabs[Random.Range(0, prefabs.Length)], pos, Quaternion.identity);
 		}
-
-		private Vector2 RandomSpawnPos() {
-
-			float x = Random.Range(_world.Left, _world.Right);
-			float y = Random.Range(_world.Bottom, _world.Top);
-			
-			return new Vector2(x, y);
-		}
-
+		
 		private float GetSpawnDelay() {
 			return Random.Range(MinSpawnRate, MaxSpawnRate);
 		}

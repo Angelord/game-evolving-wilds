@@ -8,6 +8,7 @@ namespace EvolvingWilds {
         HealthRegeneration,
         MovementSpeed,
         Sight,
+        Range,
         Count
     }
 }

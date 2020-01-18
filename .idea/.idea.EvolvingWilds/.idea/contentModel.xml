@@ -6,11 +6,39 @@
     <e p="$PROJECT_DIR$" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets/Scripts" t="Include">
+        <e p="Creatures" t="Include">
+          <e p="Creature.cs" t="Include" />
+          <e p="CreatureState.cs" t="Include" />
+          <e p="State_Attack.cs" t="Include" />
+          <e p="State_Eat.cs" t="Include" />
+          <e p="State_Run.cs" t="Include" />
+          <e p="State_Wander.cs" t="Include" />
+        </e>
+        <e p="EaterType.cs" t="Include" />
+        <e p="Effects" t="Include">
+          <e p="GrowOnStart.cs" t="Include" />
+        </e>
+        <e p="Food.cs" t="Include" />
         <e p="Mutation.cs" t="Include" />
+        <e p="Senses.cs" t="Include" />
+        <e p="Simulation.cs" t="Include" />
         <e p="Species.cs" t="Include" />
         <e p="StatType.cs" t="Include" />
-        <e p="Vegetable.cs" t="Include" />
+        <e p="Steering" t="Include">
+          <e p="Arrive.cs" t="Include" />
+          <e p="Evade.cs" t="Include" />
+          <e p="Flee.cs" t="Include" />
+          <e p="Hide.cs" t="Include" />
+          <e p="ObstacleAvoidance.cs" t="Include" />
+          <e p="OffsetPursuit.cs" t="Include" />
+          <e p="Pursuit.cs" t="Include" />
+          <e p="Seek.cs" t="Include" />
+          <e p="SteeringBehaviour.cs" t="Include" />
+          <e p="SteeringController.cs" t="Include" />
+          <e p="Wander.cs" t="Include" />
+        </e>
         <e p="Vegetation.cs" t="Include" />
+        <e p="WildsEntity.cs" t="Include" />
         <e p="World.cs" t="Include" />
       </e>
       <e p="EvolvingWilds.sln" t="IncludeFlat" />

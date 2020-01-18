@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2107bb97a104d6681bf29207f79e186, type: 3}
   m_Name: Claws
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Claws
   Icon: {fileID: 0}
   ResearchTime: 0
   CalorieConsumption: 0
