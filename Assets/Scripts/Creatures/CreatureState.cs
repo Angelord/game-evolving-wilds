@@ -7,7 +7,9 @@ namespace EvolvingWilds {
         private float _utility;
         private bool _done;
         private bool _isCurrent;
-        
+
+        public abstract WildsEntity Target { get; }
+
         public Creature Creature { get { return _creature; } }
 
         public Species Species { get { return _creature.Species; } }

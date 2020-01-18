@@ -25,7 +25,7 @@ namespace EvolvingWilds {
                 
                 // TODO : Calculate count based on calorie consumption
                 
-                PlaceCreatures(5, newSpecies);   
+                PlaceCreatures(1, newSpecies);   
             }
         }
 

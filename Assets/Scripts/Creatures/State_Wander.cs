@@ -7,6 +7,8 @@ namespace EvolvingWilds {
 
         public State_Wander(Creature creature) : base(creature) { }
 
+        public override WildsEntity Target { get { return null; } }
+
         protected override float DoUtilityCalculation() {
             return 0.2f;
         }

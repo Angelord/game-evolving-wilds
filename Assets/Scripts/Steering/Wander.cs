@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,8 +22,6 @@ namespace Claw.AI.Steering {
             
             wanderTarget += new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * wanderJitter;
             wanderTarget.Normalize();
-
-            Debug.Log("Target for " + gameObject.name + "  = " + wanderTarget);
             
             Vector2 facing = Rigidbody.velocity;
             if (facing.sqrMagnitude < 0.01f) {

@@ -3,8 +3,10 @@ using UnityEngine;
 namespace Claw.AI.Steering {
     public class Arrive : SteeringBehaviour {
 
-        [SerializeField] private Transform target;
-        [SerializeField] private float decceleration = 1.0f;
+        private Transform target;
+        private float decceleration = 1.0f;
+
+        public Transform Target { get { return target; } set { target = value; } }
 
         public Vector2 CalculateForce(Vector2 targetPos) {
             

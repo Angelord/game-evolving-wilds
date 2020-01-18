@@ -34,18 +34,21 @@ namespace EvolvingWilds {
             _species.OnMutation += OnMutation;
 
             _senses = GetComponentInChildren<Senses>();
-            _senses.OnObjectsInSightChange += OnObjectsInSightChange;
+            _senses.OnObjectEnterSight += OnObjectEnterSight;
+            _senses.OnObjectLeaveSight += OnObjectLeaveSight;
             
             _steering = GetComponent<SteeringController>();
             _steering.AddBehaviour<Wander>();
-            _steering.AddBehaviour<Seek>();
+            _steering.AddBehaviour<Arrive>();
             _steering.DisableAll();
             
             _health = species.GetStat(StatType.Health);
-            _calories = species.CalorieConsumption;
+            _calories = species.CalorieConsumption / 2.0f;
             
             UpdateStats();
             
+            _decisions.Add(new State_Wander(this));
+
             DetermineState();
 
             name += " -" + species.Name;
@@ -58,6 +61,7 @@ namespace EvolvingWilds {
         private void OnMutation() {
             float maxHealth = _species.GetStat(StatType.Health);
             _health = Mathf.Clamp(_health, 0.0f, maxHealth);
+            UpdateStats();
         }
         
         private void UpdateStats() {
@@ -65,17 +69,18 @@ namespace EvolvingWilds {
             _senses.Range = _species.GetStat(StatType.Sight);
         }
 
-        private void OnObjectsInSightChange() {
+        private void OnObjectEnterSight(WildsEntity entity) {
+            GenerateDecisions(entity);
+            DetermineState();
+        }
+
+        private void OnObjectLeaveSight(WildsEntity entity) {
+            RemoveDecisions(entity);
             DetermineState();
         }
 
         private void DetermineState() {
 
-            foreach (var objInRange in _senses.ObjectsInRange) {
-//                GenerateDecisions(objInRange);
-            }
-            
-            _decisions.Add(new State_Wander(this));
 
             if (_currentState != null && !(_currentState is State_Wander)) {
                 _decisions.Add(_currentState);
@@ -98,8 +103,6 @@ namespace EvolvingWilds {
                 return;
             }
             
-            Debug.Log("Changing state");
-
             if (_currentState != null) {
                 _currentState.Exit();
             }
@@ -126,6 +129,14 @@ namespace EvolvingWilds {
             }
         }
 
+        private void RemoveDecisions(WildsEntity entity) {
+            for (int i = _decisions.Count - 1; i >= 0; i--) {
+                if (_decisions[i].Target == entity) {
+                    _decisions.RemoveAt(i);
+                }
+            }
+        }
+
         private void Update() {
 
             _calories -= Species.CalorieConsumption * CALORIES_DECREASE_RATE * Time.deltaTime;
@@ -134,6 +145,10 @@ namespace EvolvingWilds {
             }
 
             _currentState.Update();
+
+            if (_currentState.Done) {
+                DetermineState();
+            }
         }
         
         private void Die() {
