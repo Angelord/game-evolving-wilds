@@ -6,6 +6,9 @@
     <e p="$PROJECT_DIR$" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets/Scripts" t="Include">
+        <e p="Mutation.cs" t="Include" />
+        <e p="Species.cs" t="Include" />
+        <e p="StatType.cs" t="Include" />
         <e p="Vegetable.cs" t="Include" />
         <e p="Vegetation.cs" t="Include" />
         <e p="World.cs" t="Include" />
