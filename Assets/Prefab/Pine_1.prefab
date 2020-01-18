@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4238379494163768}
   - component: {fileID: 114703790550305274}
   - component: {fileID: 58719107109494168}
+  - component: {fileID: 114154392401118048}
   m_Layer: 0
   m_Name: Pine_1
   m_TagString: Untagged
@@ -87,6 +88,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+--- !u!114 &114154392401118048
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1033218014834312}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e371d06b9f58e487085eed21b4bc443e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeAmount: 0.05
+  shakeSpeed: 20
 --- !u!114 &114183107441164322
 MonoBehaviour:
   m_ObjectHideFlags: 1

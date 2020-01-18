@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4537839661157582}
   - component: {fileID: 114481472871533044}
   - component: {fileID: 58515241485770766}
+  - component: {fileID: 114541078588920098}
   m_Layer: 0
   m_Name: Bush
   m_TagString: Untagged
@@ -100,6 +101,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FoodType: 1
   Calories: 100
+--- !u!114 &114541078588920098
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1863135572053894}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e371d06b9f58e487085eed21b4bc443e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeAmount: 0.05
+  shakeSpeed: 20
 --- !u!114 &114705455848176024
 MonoBehaviour:
   m_ObjectHideFlags: 1

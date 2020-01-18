@@ -23,7 +23,7 @@ namespace EvolvingWilds {
 
             float distance = Vector2.Distance(_food.transform.position, Creature.transform.position);
             float consumption = Creature.Species.CalorieConsumption;
-            float value = 0.95f * Mathf.Pow((1.0f - Creature.Calories / consumption), 2)
+            float value = 0.8f * Mathf.Pow((1.0f - Creature.Calories / consumption * 1.5f), 2)
                    + 0.1f * (_food.Calories / consumption)
                    + 0.05f * (1.0f - distance / Species.GetStat(StatType.Sight));
 
@@ -45,17 +45,17 @@ namespace EvolvingWilds {
         }
 
         public override void Update() {
+            if (_food == null) {
+                Done = true;
+                return;
+            }
+
             if (Vector2.Distance(Creature.transform.position, _food.transform.position) > Species.GetStat(StatType.Range)) {
                 _arrive.enabled = true;
                 return;
             }
             _arrive.enabled = false;
 
-            if (_food == null || Creature.Calories >= Species.CalorieConsumption) {
-                Done = true;
-                return;
-            }
-            
             float eatAmount = _food.LoseCalories(Species.GetStat(StatType.Foraging) * Time.deltaTime);
             
             Creature.GainCalories(eatAmount);

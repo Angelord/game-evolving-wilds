@@ -48,7 +48,6 @@ namespace EvolvingWilds {
             UpdateStats();
             
             _decisions.Add(new State_Wander(this));
-
             DetermineState();
 
             name += " -" + species.Name;
@@ -80,12 +79,7 @@ namespace EvolvingWilds {
         }
 
         private void DetermineState() {
-
-
-            if (_currentState != null && !(_currentState is State_Wander)) {
-                _decisions.Add(_currentState);
-            }
-
+            
             foreach (var decision in _decisions) {
                 decision.CalculateUtility();
             }
@@ -130,7 +124,7 @@ namespace EvolvingWilds {
         }
 
         private void RemoveDecisions(WildsEntity entity) {
-            for (int i = _decisions.Count - 1; i >= 0; i--) {
+            for (int i = _decisions.Count - 1; i >= 1; i--) {
                 if (_decisions[i].Target == entity) {
                     _decisions.RemoveAt(i);
                 }
@@ -149,8 +143,18 @@ namespace EvolvingWilds {
             if (_currentState.Done) {
                 DetermineState();
             }
+
+            if (_calories >= Species.CalorieConsumption * 2) {
+                _calories /= 2.0f;
+                Reproduce();
+            }
         }
-        
+
+        private void Reproduce() {
+            Creature child = Instantiate(gameObject, transform.position, Quaternion.identity).GetComponent<Creature>();
+            child.Initialize(Species);
+        }
+
         private void Die() {
             Food meat = Instantiate(meatPrefab, transform.position, Quaternion.identity).GetComponent<Food>();
 

@@ -17,6 +17,7 @@
         <e p="EaterType.cs" t="Include" />
         <e p="Effects" t="Include">
           <e p="GrowOnStart.cs" t="Include" />
+          <e p="Shaker.cs" t="Include" />
         </e>
         <e p="Food.cs" t="Include" />
         <e p="Mutation.cs" t="Include" />
