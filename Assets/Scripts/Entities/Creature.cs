@@ -15,6 +15,7 @@ namespace EvolvingWilds {
         private SteeringController _steering;
         private Senses _senses;
         private CircleCollider2D _collider;
+        private CreatureBuilder _builder;
         
         private List<CreatureState> _decisions = new List<CreatureState>();
         private CreatureState _currentState = null;
@@ -28,10 +29,15 @@ namespace EvolvingWilds {
 
         public Species Species { get { return _species; } }
 
+        public CreatureBuilder Builder { get { return _builder; } }
+
         public void Initialize(Species species) {
+
+            _builder = GetComponent<CreatureBuilder>();
             
             _species = species;
-            _species.OnMutation += OnMutation;
+            _species.OnMutationAdded += OnMutationAdded;
+            _species.OnMutationRemoved += OnMutationRemoved;
 
             _senses = GetComponentInChildren<Senses>();
             _senses.OnObjectEnterSight += OnObjectEnterSight;
@@ -44,9 +50,13 @@ namespace EvolvingWilds {
             
             _health = species.GetStat(StatType.Health);
             _calories = species.CalorieConsumption / 2.0f;
-            
+
+            for (int i = 0; i < _species.MutationCount; i++) {
+                OnMutationAdded(_species.GetMutation(i));
+            }
+
             UpdateStats();
-            
+
             _decisions.Add(new State_Wander(this));
             DetermineState();
 
@@ -57,13 +67,18 @@ namespace EvolvingWilds {
             _calories += amount;
         }
         
-        private void OnMutation() {
-            float maxHealth = _species.GetStat(StatType.Health);
-            _health = Mathf.Clamp(_health, 0.0f, maxHealth);
+        private void OnMutationAdded(Mutation mutation) {
             UpdateStats();
+            mutation.Apply(this);
         }
-        
+
+        private void OnMutationRemoved(Mutation mutation) {
+            UpdateStats();
+            mutation.Unapply(this);
+        }
+
         private void UpdateStats() {
+            _health = Mathf.Clamp(_health, 0.0f, _species.GetStat(StatType.Health));
             _steering.Speed = _species.GetStat(StatType.MovementSpeed);
             _senses.Range = _species.GetStat(StatType.Sight);
         }

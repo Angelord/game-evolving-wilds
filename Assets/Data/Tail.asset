@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 974f7370a4b747f4979ecd780dd8ff4e, type: 3}
-  m_Name: Claws
+  m_Name: Tail
   m_EditorClassIdentifier: 
-  Name: Claws
-  Icon: {fileID: 21300000, guid: 36e8dd758d87c4be2ba2e5140fb3dc5a, type: 3}
+  Name: Tail
+  Icon: {fileID: 21300000, guid: cd0131efc8a244a33a9286e4622eda59, type: 3}
   ResearchTime: 80
   CalorieConsumption: 40
   Prerequisites: []
   Incompatibles: []
   Modifiers: []
-  Bodypart: {fileID: 1185868578731712, guid: 6ee2df5fba2834aae91ce20ef94fe3f7, type: 2}
+  Bodypart: {fileID: 1897112566239950, guid: 3bd928e9555c942c9ac2ba369ef256f1, type: 2}

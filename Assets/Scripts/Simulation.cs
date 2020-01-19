@@ -4,6 +4,7 @@ namespace EvolvingWilds {
     [RequireComponent(typeof(World))]
     public class Simulation : MonoBehaviour {
 
+        public Mutation[] StartingMutations;
         public int NumStartingSpecies;
         public GameObject CreaturePrefab;
 
@@ -21,11 +22,15 @@ namespace EvolvingWilds {
                 // TODO : Generate names randomly
                 Species newSpecies = new Species("Species " + i);
                 
-                // TODO : Add random mutation
-                
                 // TODO : Calculate count based on calorie consumption
                 
+                foreach (var mutation in StartingMutations) {
+                    newSpecies.AddMutation(mutation);
+                }
+                
                 PlaceCreatures(1, newSpecies);   
+                
+                // TODO : Add random mutation
             }
         }
 

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 974f7370a4b747f4979ecd780dd8ff4e, type: 3}
-  m_Name: Claws
+  m_Name: Legs
   m_EditorClassIdentifier: 
-  Name: Claws
-  Icon: {fileID: 21300000, guid: 36e8dd758d87c4be2ba2e5140fb3dc5a, type: 3}
+  Name: Legs
+  Icon: {fileID: 21300000, guid: 14b136be36e92493ab7707a13d7f212b, type: 3}
   ResearchTime: 80
   CalorieConsumption: 40
   Prerequisites: []
   Incompatibles: []
   Modifiers: []
-  Bodypart: {fileID: 1185868578731712, guid: 6ee2df5fba2834aae91ce20ef94fe3f7, type: 2}
+  Bodypart: {fileID: 1209211759707818, guid: 7b96452f9a0c04f87883bb65069c1460, type: 2}

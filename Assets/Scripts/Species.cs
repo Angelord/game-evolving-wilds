@@ -21,13 +21,16 @@ namespace EvolvingWilds {
 		
 		private List<Mutation> _mutations = new List<Mutation>();
 
-		public event Action OnMutation;
+		public event Action<Mutation> OnMutationAdded;
+		public event Action<Mutation> OnMutationRemoved;
 
 		public string Name { get { return _name; } }
 
 		public float CalorieConsumption { get { return _calorieConsumption; } }
 
 		public int MutationCount { get { return _mutations.Count; } }
+
+		public EaterType EaterType { get { return _eaterType; } set { _eaterType = value; } }
 
 		public Species(string name) {
 			_name = name;
@@ -55,22 +58,22 @@ namespace EvolvingWilds {
 		}
 
 		public void AddMutation(Mutation mutation) {
-			mutation.OnAdd(this);
+			mutation.OnAddToSpecies(this);
 			_mutations.Add(mutation);
 			_calorieConsumption += mutation.CalorieConsumption;
 			
-			if (OnMutation != null) {
-				OnMutation();
+			if (OnMutationAdded != null) {
+				OnMutationAdded(mutation);
 			}
 		}
 
 		public void RemoveMutation(Mutation mutation) {
-			mutation.OnRemove(this);
+			mutation.OnRemoveFromSpecies(this);
 			_mutations.Remove(mutation);
 			_calorieConsumption -= mutation.CalorieConsumption;
 			
-			if (OnMutation != null) {
-				OnMutation();
+			if (OnMutationRemoved != null) {
+				OnMutationRemoved(mutation);
 			}
 		}
 		

@@ -6,21 +6,32 @@
     <e p="$PROJECT_DIR$" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets/Scripts" t="Include">
-        <e p="Creatures" t="Include">
-          <e p="Creature.cs" t="Include" />
-          <e p="CreatureState.cs" t="Include" />
-          <e p="State_Attack.cs" t="Include" />
-          <e p="State_Eat.cs" t="Include" />
-          <e p="State_Run.cs" t="Include" />
-          <e p="State_Wander.cs" t="Include" />
-        </e>
+        <e p="Bodypart.cs" t="Include" />
+        <e p="CreatureBuilder.cs" t="Include" />
+        <e p="CreatureJoint.cs" t="Include" />
         <e p="EaterType.cs" t="Include" />
         <e p="Effects" t="Include">
           <e p="GrowOnStart.cs" t="Include" />
           <e p="Shaker.cs" t="Include" />
         </e>
-        <e p="Food.cs" t="Include" />
-        <e p="Mutation.cs" t="Include" />
+        <e p="Entities" t="Include">
+          <e p="Creature.cs" t="Include" />
+          <e p="CreatureState.cs" t="Include" />
+          <e p="Food.cs" t="Include" />
+          <e p="State_Attack.cs" t="Include" />
+          <e p="State_Eat.cs" t="Include" />
+          <e p="State_Run.cs" t="Include" />
+          <e p="State_Wander.cs" t="Include" />
+          <e p="Vegetation.cs" t="Include" />
+          <e p="WildsEntity.cs" t="Include" />
+        </e>
+        <e p="JointType.cs" t="Include" />
+        <e p="Mutations" t="Include">
+          <e p="BodypartMutation.cs" t="Include" />
+          <e p="EaterTypeMutation.cs" t="Include" />
+          <e p="Mutation.cs" t="Include" />
+          <e p="TorsoMutation.cs" t="Include" />
+        </e>
         <e p="Senses.cs" t="Include" />
         <e p="Simulation.cs" t="Include" />
         <e p="Species.cs" t="Include" />
@@ -38,8 +49,7 @@
           <e p="SteeringController.cs" t="Include" />
           <e p="Wander.cs" t="Include" />
         </e>
-        <e p="Vegetation.cs" t="Include" />
-        <e p="WildsEntity.cs" t="Include" />
+        <e p="Torso.cs" t="Include" />
         <e p="World.cs" t="Include" />
       </e>
       <e p="EvolvingWilds.sln" t="IncludeFlat" />
