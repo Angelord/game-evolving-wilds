@@ -1,8 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace EvolvingWilds {
 	public class Species {
+		
+		public class MutationResearch {
+			public Mutation Mutation;
+			public float Progress;
+
+			public MutationResearch(Mutation mutation) {
+				Mutation = mutation;
+				Progress = 0.0f;
+			}
+
+			public void Update() {
+				Progress += Time.deltaTime;
+			}
+
+			public bool IsDone() {
+				return Progress / Mutation.ResearchTime >= 1.0f;
+			}
+		}
 
 		private static readonly float[] BASE_STATS = new float[(int) StatType.Count] {
 			10.0f, // Foraging
@@ -20,7 +39,9 @@ namespace EvolvingWilds {
 		private string _name;
 		
 		private List<Mutation> _mutations = new List<Mutation>();
+		private MutationResearch _research;
 
+		public event Action<Species, Mutation> OnResearchComplete;
 		public event Action<Mutation> OnMutationAdded;
 		public event Action<Mutation> OnMutationRemoved;
 
@@ -31,6 +52,8 @@ namespace EvolvingWilds {
 		public int MutationCount { get { return _mutations.Count; } }
 
 		public EaterType EaterType { get { return _eaterType; } set { _eaterType = value; } }
+
+		public bool Researching { get { return _research != null; } }
 
 		public Species(string name) {
 			_name = name;
@@ -85,6 +108,22 @@ namespace EvolvingWilds {
 			}
 
 			return value;
+		}
+
+		public void BeginResearch(Mutation mutation) {
+			_research = new MutationResearch(mutation);
+		}
+
+		public void UpdateResearch() {
+			if(_research == null) return;
+
+			_research.Update();
+			if (_research.IsDone()) {
+				if(OnResearchComplete != null)
+					OnResearchComplete(this, _research.Mutation);
+				AddMutation(_research.Mutation);
+				_research = null;
+			}
 		}
 	}
 }

@@ -1,8 +1,8 @@
 using UnityEngine;
 
 namespace EvolvingWilds {
-    [CreateAssetMenu(fileName = "Eater Type Mutation", menuName = "Mutations/Eater Type Mutation", order = 1)]
-    public class EaterTypeMutation : Mutation {
+    [CreateAssetMenu(fileName = "Head Mutation", menuName = "Mutations/Head Mutation", order = 1)]
+    public class HeadMutation : BodypartMutation {
         
         public EaterType Type;
 

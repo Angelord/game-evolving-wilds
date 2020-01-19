@@ -28,10 +28,12 @@
         <e p="JointType.cs" t="Include" />
         <e p="Mutations" t="Include">
           <e p="BodypartMutation.cs" t="Include" />
-          <e p="EaterTypeMutation.cs" t="Include" />
+          <e p="HeadMutation.cs" t="Include" />
           <e p="Mutation.cs" t="Include" />
+          <e p="MutationGroup.cs" t="Include" />
           <e p="TorsoMutation.cs" t="Include" />
         </e>
+        <e p="Mutator.cs" t="Include" />
         <e p="Senses.cs" t="Include" />
         <e p="Simulation.cs" t="Include" />
         <e p="Species.cs" t="Include" />
