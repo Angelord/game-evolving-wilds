@@ -55,6 +55,7 @@ namespace EvolvingWilds {
             _steering.AddBehaviour<Wander>();
             _steering.AddBehaviour<Arrive>();
             _steering.AddBehaviour<Pursuit>();
+            _steering.AddBehaviour<Flee>();
             _steering.DisableAll();
             
             _health = species.GetStat(StatType.Health);
@@ -63,8 +64,6 @@ namespace EvolvingWilds {
             for (int i = 0; i < _species.MutationCount; i++) {
                 OnMutationAdded(_species.GetMutation(i));
             }
-            
-            Debug.Log(species.CalorieConsumption);
             
             UpdateStats();
 
@@ -88,7 +87,7 @@ namespace EvolvingWilds {
             if (_health <= 0.0f) {
                 Die();
             }
-            else if (!(_currentState is State_Attack) && !(_currentState is State_Run)) {
+            else {
                 RethinkState();
             }
         }
@@ -150,11 +149,15 @@ namespace EvolvingWilds {
         private void GenerateDecisions(WildsEntity entity) {
             if (entity is Creature) {
                 Creature creature = entity as Creature;
-             
+
                 // TODO Add mating
                 
+                if (creature.Species == Species) {
+                    return;
+                }
+                
                 _decisions.Add(new State_Attack(this, creature));
-//                _decisions.Add(new State_Run(this, creature));
+                _decisions.Add(new State_Run(this, creature));
             }
             else if (entity is Food) {
                 

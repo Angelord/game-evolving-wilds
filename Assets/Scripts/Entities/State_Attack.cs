@@ -30,7 +30,7 @@ namespace EvolvingWilds {
             
             float value = 0.8f * (1.0f - Creature.Calories / (consumption * 3.0f))
                             + 0.15f * (_target.CorpseCalories / consumption)
-                            + 0.05f * (1.0f - distance / Species.GetStat(StatType.Sight))
+                            + 0.05f * (1.0f - distance / Species.GetStat(StatType.Sight) * 2.0f)
                             - 0.2f * (_target.DamagePerSecond / Creature.DamagePerSecond)
                             - 0.1f * (1.0f - Creature.Health / Species.GetStat(StatType.Health))
                             + 0.1f * (1.0f - _target.Health / _target.Species.GetStat(StatType.Health))
@@ -62,7 +62,7 @@ namespace EvolvingWilds {
 
             float distance = GetDistanceToTarget();
 
-            if (distance > Species.GetStat(StatType.Sight)) {    // Ran away
+            if (distance > Species.GetStat(StatType.Sight) * 2.0f) {    // Ran away
                 Done = true;
                 return;
             }
