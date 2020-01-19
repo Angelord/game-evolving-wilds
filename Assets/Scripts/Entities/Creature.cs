@@ -179,6 +179,8 @@ namespace EvolvingWilds {
             meat.Calories = _species.CalorieConsumption / 2 + Calories * _species.CalorieConsumption; 
             
             Destroy(this.gameObject);
+
+            Simulation.DeathCount++;
         }
 
         // On Entity In Sight -> Rethink state

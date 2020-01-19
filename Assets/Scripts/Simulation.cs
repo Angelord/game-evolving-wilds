@@ -11,6 +11,8 @@ namespace EvolvingWilds {
     public class Simulation : MonoBehaviour {
 
         private const int MAX_SPEED = 4;
+
+        public static int DeathCount = 0;
         
         public Mutation[] StartingMutations;
         public Mutation[] AllMutations;
@@ -98,6 +100,10 @@ namespace EvolvingWilds {
             Mutation newMutation = missingMutations[Random.Range(0, missingMutations.Count)];
             
             species.BeginResearch(newMutation);
+        }
+
+        private void OnGUI() {
+            GUI.Label(new Rect(20, 20, 300, 200), "Death Count " + DeathCount);
         }
     }
 }
