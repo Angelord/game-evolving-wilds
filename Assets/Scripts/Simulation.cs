@@ -14,9 +14,12 @@ namespace EvolvingWilds {
 
         public static int DeathCount = 0;
         
-        public Mutation[] StartingMutations;
+        public Mutation[] HerbivoreStartingMutations;
+        public Mutation[] CarnivoreStartingMutations;
         public Mutation[] AllMutations;
-        public int NumStartingSpecies;
+        public int BiomassPerStartingSpecies;
+        public int NumStartingHerbivores;
+        public int NumStartingCarnivores;
         public List<Species> Species = new List<Species>();
         public GameObject CreaturePrefab;
 
@@ -57,33 +60,35 @@ namespace EvolvingWilds {
         }
 
         private void PlaceStarting() {
-            for (int i = 0; i < NumStartingSpecies; i++) {
-                
-                // TODO : Generate names randomly
-                Species newSpecies = new Species("Species " + i);
-                
-                foreach (var mutation in StartingMutations) {
-                    newSpecies.AddMutation(mutation);
-                }
-                
-                Species.Add(newSpecies);
-
-                newSpecies.OnResearchComplete += OnResearchComplete;
-                
-                BeginRandomResearch(newSpecies);
-
-                // TODO : Calculate count based on calorie consumption
-
-                PlaceCreatures(5, newSpecies);   
-                
-                // TODO : Add random mutation
+            
+            for (int i = 0; i < NumStartingHerbivores; i++) {
+                PlaceInitialSpecies(HerbivoreStartingMutations);   
+            }
+            
+            for (int i = 0; i < NumStartingCarnivores; i++) {
+                PlaceInitialSpecies(CarnivoreStartingMutations);   
             }
         }
+        
+        private void PlaceInitialSpecies(Mutation[] startingMutations) {
+            // TODO : Generate names randomly
+            Species newSpecies = new Species("Species ");
+                
+            Species.Add(newSpecies);
 
-        private void PlaceCreatures(int count, Species species) {
-            for (int i = 0; i < count; i++) {
+            foreach (var mutation in startingMutations) {
+                newSpecies.AddMutation(mutation);
+            }
+            
+            newSpecies.OnResearchComplete += OnResearchComplete;
+            
+            BeginRandomResearch(newSpecies);
+
+            float spawnCount = Mathf.RoundToInt(BiomassPerStartingSpecies / newSpecies.CalorieConsumption);
+            
+            for (int i = 0; i < spawnCount; i++) {
                 Creature creature = Instantiate(CreaturePrefab, _world.RandomPosition(), Quaternion.identity).GetComponent<Creature>();
-                creature.Initialize(species);
+                creature.Initialize(newSpecies);
             }
         }
 

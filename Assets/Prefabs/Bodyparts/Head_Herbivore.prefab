@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212880729317790180}
   - component: {fileID: 114665825841804358}
   m_Layer: 0
-  m_Name: Head
+  m_Name: Head_Herbivore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
