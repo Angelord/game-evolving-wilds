@@ -439,7 +439,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 495a8f33c849047e3bf3a729f90ef2ab, type: 2}
   - {fileID: 11400000, guid: 782f77c78f9ab4b74bbcaa972c105c78, type: 2}
   BiomassPerStartingSpecies: 1000
-  NumStartingHerbivores: 3
+  NumStartingHerbivores: 1
   NumStartingCarnivores: 1
   CreaturePrefab: {fileID: 1047355568363352, guid: f26391251720e476f820cf09fbf51c40,
     type: 2}

@@ -14,6 +14,7 @@ namespace EvolvingWilds {
         }
 
         protected override float DoUtilityCalculation() {
+
             if (!Creature.Species.CanEat(_food.FoodType)) {
                 return 0.0f;
             }
@@ -27,7 +28,7 @@ namespace EvolvingWilds {
                    + 0.05f * (1.0f - distance / Species.GetStat(StatType.Sight));
             
             if (IsCurrent && !Done) {
-                value += 0.2f;
+                value += 0.1f;
             }
 
             return value;

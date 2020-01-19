@@ -7,7 +7,7 @@ namespace EvolvingWilds {
         private Creature _target;
         private Flee _flee;
         
-        public override WildsEntity Target { get { return null; } }
+        public override WildsEntity Target { get { return _target; } }
 
         public State_Run(Creature creature, Creature target) : base(creature) {
             _target = target;
@@ -21,11 +21,13 @@ namespace EvolvingWilds {
             
             float distance = Vector2.Distance(_target.transform.position, Creature.transform.position);
 
-            float value = 0.8f * (_target.DamagePerSecond / Creature.DamagePerSecond)
+            float value = 1.0f * (_target.DamagePerSecond / Creature.DamagePerSecond)
                         + 0.6f * (Creature.Health / Species.GetStat(StatType.Health))
                         + 0.6f * (1.0f - distance / (_target.Species.GetStat(StatType.Sight) * 3.0f));
 
-            Debug.Log("Run Value " + value);
+            if (IsCurrent && !Done) {
+                return value + 0.2f;
+            }
             
             return value;
         }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Claw.AI.Steering;
+using Random = UnityEngine.Random;
 
 namespace EvolvingWilds {
     [RequireComponent(typeof(SteeringController))]

@@ -29,8 +29,8 @@ namespace EvolvingWilds {
 
         public void CalculateUtility() {
             _utility = DoUtilityCalculation();
-            if (Creature.Species.EaterType == EaterType.Carnivore) {
-//                Debug.Log("utility for " + this.GetType() + " : " + _utility);
+            if (Creature.Species.EaterType == EaterType.Herbivore) {
+                Debug.Log("utility for " + this.GetType() + " : " + _utility);
             }
         }
 
