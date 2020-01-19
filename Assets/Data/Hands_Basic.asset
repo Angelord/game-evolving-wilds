@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 974f7370a4b747f4979ecd780dd8ff4e, type: 3}
+  m_Name: Hands_Basic
+  m_EditorClassIdentifier: 
+  Name: Claws
+  Icon: {fileID: 21300000, guid: 36e8dd758d87c4be2ba2e5140fb3dc5a, type: 3}
+  ResearchTime: 80
+  CalorieConsumption: 20
+  Prerequisites: []
+  Incompatibles: []
+  Modifiers: []
+  Bodypart: {fileID: 1185868578731712, guid: 6ee2df5fba2834aae91ce20ef94fe3f7, type: 2}

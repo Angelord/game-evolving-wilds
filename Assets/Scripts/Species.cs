@@ -26,7 +26,7 @@ namespace EvolvingWilds {
 
 		private static readonly float[] BASE_STATS = new float[(int) StatType.Count] {
 			10.0f, // Foraging
-			10.0f, // Damage
+			5.0f, // Damage
 			0.5f, // Attack Speed
 			0.5f, // Calorie Efficiency
 			100.0f, // Health

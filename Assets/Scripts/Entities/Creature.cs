@@ -25,11 +25,19 @@ namespace EvolvingWilds {
 
         public SteeringController Steering { get { return _steering; } }
 
-//        public float Calories { get { return _calories; } }
+        public float CorpseCalories {
+            get { return _species.CalorieConsumption / 2 + Calories; }
+        }
+
+        public float Health { get { return _health; } }
 
         public Species Species { get { return _species; } }
 
         public CreatureBuilder Builder { get { return _builder; } }
+
+        public float DamagePerSecond {
+            get { return _species.GetStat(StatType.Damage) / _species.GetStat(StatType.AttackSpeed); }
+        }
 
         public void Initialize(Species species) {
 
@@ -46,6 +54,7 @@ namespace EvolvingWilds {
             _steering = GetComponent<SteeringController>();
             _steering.AddBehaviour<Wander>();
             _steering.AddBehaviour<Arrive>();
+            _steering.AddBehaviour<Pursuit>();
             _steering.DisableAll();
             
             _health = species.GetStat(StatType.Health);
@@ -60,15 +69,30 @@ namespace EvolvingWilds {
             UpdateStats();
 
             _decisions.Add(new State_Wander(this));
-            DetermineState();
+            RethinkState();
 
             name += " -" + species.Name;
+        }
+
+        public bool IsAttacking(Creature creature) {
+            State_Attack attackState = _currentState as State_Attack;
+            return attackState != null && attackState.Target == creature;
         }
 
         public void GainCalories(float amount) {
             Calories += amount;
         }
-        
+
+        public void TakeDamage(float amount) {
+            _health -= amount;
+            if (_health <= 0.0f) {
+                Die();
+            }
+            else if (!(_currentState is State_Attack) && !(_currentState is State_Run)) {
+                RethinkState();
+            }
+        }
+
         private void OnMutationAdded(Mutation mutation) {
             UpdateStats();
             mutation.Apply(this);
@@ -87,15 +111,15 @@ namespace EvolvingWilds {
 
         private void OnObjectEnterSight(WildsEntity entity) {
             GenerateDecisions(entity);
-            DetermineState();
+            RethinkState();
         }
 
         private void OnObjectLeaveSight(WildsEntity entity) {
             RemoveDecisions(entity);
-            DetermineState();
+            RethinkState();
         }
 
-        private void DetermineState() {
+        private void RethinkState() {
             
             foreach (var decision in _decisions) {
                 decision.CalculateUtility();
@@ -127,9 +151,9 @@ namespace EvolvingWilds {
             if (entity is Creature) {
                 Creature creature = entity as Creature;
              
-                // TODO Add mate 
+                // TODO Add mating
                 
-//                _decisions.Add(new State_Attack(this, creature));
+                _decisions.Add(new State_Attack(this, creature));
 //                _decisions.Add(new State_Run(this, creature));
             }
             else if (entity is Food) {
@@ -158,7 +182,7 @@ namespace EvolvingWilds {
             _currentState.Update();
 
             if (_currentState.Done) {
-                DetermineState();
+                RethinkState();
             }
 
             if (Calories >= Species.CalorieConsumption * 2) {
@@ -176,7 +200,7 @@ namespace EvolvingWilds {
         private void Die() {
             Food meat = Instantiate(meatPrefab, transform.position, Quaternion.identity).GetComponent<Food>();
 
-            meat.Calories = _species.CalorieConsumption / 2 + Calories * _species.CalorieConsumption; 
+            meat.Calories = CorpseCalories; 
             
             Destroy(this.gameObject);
 

@@ -149,7 +149,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meatPrefab: {fileID: 1863135572053894, guid: 0524e541a811640c99e80c3b3ee7a25e, type: 2}
+  Calories: 0
 --- !u!212 &212606456637891170
 SpriteRenderer:
   m_ObjectHideFlags: 1

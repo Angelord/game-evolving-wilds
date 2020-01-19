@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212425089549587278}
   - component: {fileID: 114800417237160632}
   m_Layer: 0
-  m_Name: Claws
+  m_Name: Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

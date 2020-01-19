@@ -1,4 +1,5 @@
 using Claw.AI.Steering;
+using UnityEngine;
 
 namespace EvolvingWilds {
     public abstract class CreatureState {
@@ -28,6 +29,9 @@ namespace EvolvingWilds {
 
         public void CalculateUtility() {
             _utility = DoUtilityCalculation();
+            if (Creature.Species.EaterType == EaterType.Carnivore) {
+                Debug.Log("utility for " + this.GetType() + " : " + _utility);
+            }
         }
 
         protected abstract float DoUtilityCalculation();

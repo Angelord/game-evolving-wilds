@@ -11,7 +11,6 @@ namespace EvolvingWilds {
 
         public State_Eat(Creature creature, Food food) : base(creature) {
             _food = food;
-            _arrive = Steering.GetBehaviour<Arrive>();
         }
 
         protected override float DoUtilityCalculation() {
@@ -23,10 +22,10 @@ namespace EvolvingWilds {
 
             float distance = Vector2.Distance(_food.transform.position, Creature.transform.position);
             float consumption = Creature.Species.CalorieConsumption;
-            float value = 0.85f * Mathf.Pow((1.0f - Creature.Calories / (consumption * 3.0f)), 2)
+            float value = 0.85f * (1.0f - Creature.Calories / (consumption * 3.0f))
                    + 0.1f * (_food.Calories / consumption)
                    + 0.05f * (1.0f - distance / Species.GetStat(StatType.Sight));
-
+            
             if (IsCurrent && !Done) {
                 value += 0.2f;
             }
@@ -35,6 +34,7 @@ namespace EvolvingWilds {
         }
 
         protected override void OnEnter() {
+            _arrive = Steering.GetBehaviour<Arrive>();
             _arrive.enabled = true;
             _arrive.Target = _food.transform;
             _arrive.MoveToFront();
