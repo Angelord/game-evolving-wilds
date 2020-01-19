@@ -30,7 +30,6 @@
           <e p="BodypartMutation.cs" t="Include" />
           <e p="HeadMutation.cs" t="Include" />
           <e p="Mutation.cs" t="Include" />
-          <e p="MutationGroup.cs" t="Include" />
           <e p="TorsoMutation.cs" t="Include" />
         </e>
         <e p="Mutator.cs" t="Include" />
@@ -52,6 +51,9 @@
           <e p="Wander.cs" t="Include" />
         </e>
         <e p="Torso.cs" t="Include" />
+        <e p="UserInterface" t="Include">
+          <e p="SimulationControls.cs" t="Include" />
+        </e>
         <e p="World.cs" t="Include" />
       </e>
       <e p="EvolvingWilds.sln" t="IncludeFlat" />

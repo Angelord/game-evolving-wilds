@@ -7,7 +7,7 @@ namespace EvolvingWilds {
     [RequireComponent(typeof(CircleCollider2D))]
     public class Creature : WildsEntity {
 
-        private const float CALORIES_DECREASE_RATE = 0.01f;
+        private const float CALORIES_DECREASE_RATE = 0.008f;
 
         public GameObject meatPrefab;
         
@@ -21,11 +21,11 @@ namespace EvolvingWilds {
         private CreatureState _currentState = null;
         
         private float _health;
-        private float _calories;
+        public float Calories;
 
         public SteeringController Steering { get { return _steering; } }
 
-        public float Calories { get { return _calories; } }
+//        public float Calories { get { return _calories; } }
 
         public Species Species { get { return _species; } }
 
@@ -49,12 +49,14 @@ namespace EvolvingWilds {
             _steering.DisableAll();
             
             _health = species.GetStat(StatType.Health);
-            _calories = species.CalorieConsumption / 2.0f;
+            Calories = species.CalorieConsumption / 2.0f;
 
             for (int i = 0; i < _species.MutationCount; i++) {
                 OnMutationAdded(_species.GetMutation(i));
             }
-
+            
+            Debug.Log(species.CalorieConsumption);
+            
             UpdateStats();
 
             _decisions.Add(new State_Wander(this));
@@ -64,7 +66,7 @@ namespace EvolvingWilds {
         }
 
         public void GainCalories(float amount) {
-            _calories += amount;
+            Calories += amount;
         }
         
         private void OnMutationAdded(Mutation mutation) {
@@ -148,8 +150,8 @@ namespace EvolvingWilds {
 
         private void Update() {
 
-            _calories -= Species.CalorieConsumption * CALORIES_DECREASE_RATE * Time.deltaTime;
-            if (_calories <= 0.0f) {
+            Calories -= Species.CalorieConsumption * CALORIES_DECREASE_RATE * Time.deltaTime;
+            if (Calories <= 0.0f) {
                 Die();        
             }
 
@@ -159,8 +161,9 @@ namespace EvolvingWilds {
                 DetermineState();
             }
 
-            if (_calories >= Species.CalorieConsumption * 2) {
-                _calories /= 2.0f;
+            if (Calories >= Species.CalorieConsumption * 2) {
+                Debug.Log("Reproducing");
+                Calories /= 2.0f;
                 Reproduce();
             }
         }
@@ -173,7 +176,7 @@ namespace EvolvingWilds {
         private void Die() {
             Food meat = Instantiate(meatPrefab, transform.position, Quaternion.identity).GetComponent<Food>();
 
-            meat.Calories = _species.CalorieConsumption / 2 + _calories * _species.CalorieConsumption; 
+            meat.Calories = _species.CalorieConsumption / 2 + Calories * _species.CalorieConsumption; 
             
             Destroy(this.gameObject);
         }

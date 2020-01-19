@@ -23,7 +23,7 @@ namespace EvolvingWilds {
 
             float distance = Vector2.Distance(_food.transform.position, Creature.transform.position);
             float consumption = Creature.Species.CalorieConsumption;
-            float value = 0.8f * Mathf.Pow((1.0f - Creature.Calories / consumption * 1.5f), 2)
+            float value = 0.85f * Mathf.Pow((1.0f - Creature.Calories / (consumption * 3.0f)), 2)
                    + 0.1f * (_food.Calories / consumption)
                    + 0.05f * (1.0f - distance / Species.GetStat(StatType.Sight));
 

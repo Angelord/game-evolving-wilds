@@ -6,9 +6,12 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace EvolvingWilds {
+
     [RequireComponent(typeof(World))]
     public class Simulation : MonoBehaviour {
 
+        private const int MAX_SPEED = 4;
+        
         public Mutation[] StartingMutations;
         public Mutation[] AllMutations;
         public int NumStartingSpecies;
@@ -16,7 +19,29 @@ namespace EvolvingWilds {
         public GameObject CreaturePrefab;
 
         private World _world;
-        
+        private bool _paused;
+        private int _speed;
+
+        public bool Paused {
+            get {
+                return _paused;
+            }
+            set {
+                _paused = value;
+                Time.timeScale = _paused ? 0.0f : 1.0f;
+            }
+        }
+
+        public void IncreaseSpeed() {
+            _speed = Mathf.Clamp(_speed + 1, 0, MAX_SPEED);
+            Time.timeScale = Mathf.Pow(2.0f, _speed);
+        }
+
+        public void DecreaseSpeed() {
+            _speed = Mathf.Clamp(_speed - 1, 0, MAX_SPEED);
+            Time.timeScale = Mathf.Pow(2.0f, _speed);
+        }
+
         private void Start() {
             _world = GetComponent<World>();
             
@@ -67,6 +92,8 @@ namespace EvolvingWilds {
         private void BeginRandomResearch(Species species) {
             
             List<Mutation> missingMutations = AllMutations.Where(mutation => !species.HasMutation(mutation)).ToList();
+
+            if(missingMutations.Count == 0) return;
 
             Mutation newMutation = missingMutations[Random.Range(0, missingMutations.Count)];
             

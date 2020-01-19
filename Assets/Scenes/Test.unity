@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 335812049}
   - component: {fileID: 335812051}
   - component: {fileID: 335812052}
+  - component: {fileID: 335812053}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -424,9 +425,21 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e00599d681cc14d85af925ab176e38c7, type: 2}
   - {fileID: 11400000, guid: 495a8f33c849047e3bf3a729f90ef2ab, type: 2}
   - {fileID: 11400000, guid: e49362fb4bed34dc0bca37f692d666e7, type: 2}
+  AllMutations: []
   NumStartingSpecies: 1
   CreaturePrefab: {fileID: 1047355568363352, guid: f26391251720e476f820cf09fbf51c40,
     type: 2}
+--- !u!114 &335812053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 335812048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d326b91c57747649fc5e27939b12f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &402738999
 GameObject:
   m_ObjectHideFlags: 0
