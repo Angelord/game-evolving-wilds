@@ -88,6 +88,17 @@ namespace Claw.AI.Steering {
             rBody.AddForce(accumForce, ForceMode2D.Impulse);
             
             Wrap();
+
+            if (rBody.velocity.sqrMagnitude < 0.15f) {
+                return;
+            }
+
+            if (rBody.velocity.x > 0.0f) {
+                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+            }
+            else {
+                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+            }
         }
 
         private bool AccumulateForce(Vector2 toAdd) {

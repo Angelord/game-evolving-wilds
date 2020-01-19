@@ -28,7 +28,7 @@ namespace EvolvingWilds {
                     newSpecies.AddMutation(mutation);
                 }
                 
-                PlaceCreatures(1, newSpecies);   
+                PlaceCreatures(5, newSpecies);   
                 
                 // TODO : Add random mutation
             }
