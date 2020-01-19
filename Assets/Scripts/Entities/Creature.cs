@@ -203,6 +203,7 @@ namespace EvolvingWilds {
                 ) * Species.GetStat(StatType.Range);
             
             Creature child = Instantiate(gameObject, transform.position + (Vector3)childOffset, Quaternion.identity).GetComponent<Creature>();
+            child.Builder.Clear();
             child.Initialize(Species);
         }
 

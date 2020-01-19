@@ -8,7 +8,12 @@ public class CreatureBuilder : MonoBehaviour {
     private Creature _creature;
     private Torso _torso;
     private List<Bodypart> _bodyparts = new List<Bodypart>();
-    
+
+    public void Clear() {
+        Destroy(_torso.gameObject);
+        _bodyparts.Clear();
+    }
+
     public void SetTorso(GameObject torsoPrefab) {
         _creature = GetComponent<Creature>();
         
