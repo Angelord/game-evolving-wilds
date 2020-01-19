@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace EvolvingWilds {
 	public class Species {
@@ -44,6 +45,7 @@ namespace EvolvingWilds {
 		public event Action<Species, Mutation> OnResearchComplete;
 		public event Action<Mutation> OnMutationAdded;
 		public event Action<Mutation> OnMutationRemoved;
+		public Color Color;
 
 		public string Name { get { return _name; } }
 
@@ -57,6 +59,7 @@ namespace EvolvingWilds {
 
 		public Species(string name) {
 			_name = name;
+			Color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
 		}
 
 		public Species Clone(string cloneName) {

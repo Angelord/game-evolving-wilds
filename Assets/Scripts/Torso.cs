@@ -5,6 +5,10 @@ public class Torso : MonoBehaviour {
 
     public CreatureJoint[] creatureJoints;
 
+    public void SetColor(Color color) {
+        GetComponentInChildren<SpriteRenderer>().color = color;
+    }
+
     public CreatureJoint GetJoint(JointType jointType) {
         foreach (CreatureJoint joint in creatureJoints) {
             if (joint.Type == jointType) {
