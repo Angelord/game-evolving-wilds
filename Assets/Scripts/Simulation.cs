@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -23,9 +22,12 @@ namespace EvolvingWilds {
         public List<Species> Species = new List<Species>();
         public GameObject CreaturePrefab;
 
+        private static Simulation _instance;
         private World _world;
         private bool _paused;
         private int _speed;
+
+        public static Simulation Instance { get { return _instance; } }
 
         public bool Paused {
             get {
@@ -36,7 +38,23 @@ namespace EvolvingWilds {
                 Time.timeScale = _paused ? 0.0f : 1.0f;
             }
         }
+        private void Start() {
+            _instance = this;
+            _world = GetComponent<World>();
+            
+            PlaceStarting();
+        }
 
+        private void OnDestroy() {
+            _instance = null;
+        }
+
+        private void Update() {
+            foreach (var species in Species) {
+                species.UpdateResearch();
+            }
+        }
+        
         public void IncreaseSpeed() {
             _speed = Mathf.Clamp(_speed + 1, 0, MAX_SPEED);
             Time.timeScale = Mathf.Pow(2.0f, _speed);
@@ -47,16 +65,12 @@ namespace EvolvingWilds {
             Time.timeScale = Mathf.Pow(2.0f, _speed);
         }
 
-        private void Start() {
-            _world = GetComponent<World>();
+        public void Reproduce(Vector2 position, Species species) {
+            // TODO : Random chance to create new species 
             
-            PlaceStarting();
-        }
-
-        private void Update() {
-            foreach (var species in Species) {
-                species.UpdateResearch();
-            }
+            Vector2 childOffset = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * species.GetStat(StatType.Range);
+            Creature child = Instantiate(CreaturePrefab, position + childOffset, Quaternion.identity).GetComponent<Creature>();
+            child.Initialize(species);
         }
 
         private void PlaceStarting() {

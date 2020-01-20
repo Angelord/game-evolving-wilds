@@ -193,20 +193,8 @@ namespace EvolvingWilds {
             if (Calories >= Species.CalorieConsumption * 2) {
                 Debug.Log("Reproducing");
                 Calories /= 2.0f;
-                Reproduce();
+                Simulation.Instance.Reproduce(transform.position, this);
             }
-        }
-
-        private void Reproduce() {
-
-            Vector2 childOffset = new Vector2(
-                Random.Range(-1.0f, 1.0f),
-                Random.Range(-1.0f, 1.0f)
-                ) * Species.GetStat(StatType.Range);
-            
-            Creature child = Instantiate(gameObject, transform.position + (Vector3)childOffset, Quaternion.identity).GetComponent<Creature>();
-            child.Builder.Clear();
-            child.Initialize(Species);
         }
 
         private void Die() {
