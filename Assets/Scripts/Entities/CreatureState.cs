@@ -8,12 +8,12 @@ namespace EvolvingWilds {
         private float _utility;
         private bool _done;
         private bool _isCurrent;
-
-        public abstract WildsEntity Target { get; }
-
+        
         public Creature Creature { get { return _creature; } }
 
         public Species Species { get { return _creature.Species; } }
+
+        public Senses Senses { get { return _creature.Senses; } }
 
         public SteeringController Steering { get { return _creature.Steering; } }
 
@@ -29,9 +29,9 @@ namespace EvolvingWilds {
 
         public void CalculateUtility() {
             _utility = DoUtilityCalculation();
-            if (Creature.Species.EaterType == EaterType.Herbivore) {
-                Debug.Log("utility for " + this.GetType() + " : " + _utility);
-            }
+//            if (Creature.Species.EaterType == EaterType.Herbivore) {
+//                Debug.Log("utility for " + this.GetType() + " : " + _utility);
+//            }
         }
 
         protected abstract float DoUtilityCalculation();

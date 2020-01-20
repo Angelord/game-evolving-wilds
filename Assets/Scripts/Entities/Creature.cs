@@ -10,14 +10,17 @@ namespace EvolvingWilds {
     public class Creature : WildsEntity {
 
         private const float CALORIES_DECREASE_RATE = 0.008f;
+        private const float STATE_RETHINK_INTERVAL = 0.5f;
+        private const float STATE_RETHINK_DEVIATION = 0.1f;
 
         public GameObject meatPrefab;
         
         private Species _species;
         private SteeringController _steering;
-        private Senses _senses;
+        private Senses _senseses;
         private CircleCollider2D _collider;
         private CreatureBuilder _builder;
+        private float _nextStateRethink;
         
         private List<CreatureState> _decisions = new List<CreatureState>();
         private CreatureState _currentState = null;
@@ -37,6 +40,8 @@ namespace EvolvingWilds {
 
         public CreatureBuilder Builder { get { return _builder; } }
 
+        public Senses Senses { get { return _senseses; } }
+
         public float DamagePerSecond {
             get { return _species.GetStat(StatType.Damage) / _species.GetStat(StatType.AttackSpeed); }
         }
@@ -49,15 +54,13 @@ namespace EvolvingWilds {
             _species.OnMutationAdded += OnMutationAdded;
             _species.OnMutationRemoved += OnMutationRemoved;
 
-            _senses = GetComponentInChildren<Senses>();
-            _senses.OnObjectEnterSight += OnObjectEnterSight;
-            _senses.OnObjectLeaveSight += OnObjectLeaveSight;
+            _senseses = GetComponentInChildren<Senses>();
             
             _steering = GetComponent<SteeringController>();
-            _steering.AddBehaviour<Wander>();
-            _steering.AddBehaviour<Arrive>();
+            _steering.AddBehaviour<PredatorAvoidance>();
             _steering.AddBehaviour<Pursuit>();
-            _steering.AddBehaviour<Flee>();
+            _steering.AddBehaviour<Arrive>();
+            _steering.AddBehaviour<Wander>();
             _steering.DisableAll();
             
             _health = species.GetStat(StatType.Health);
@@ -69,7 +72,6 @@ namespace EvolvingWilds {
             
             UpdateStats();
 
-            _decisions.Add(new State_Wander(this));
             RethinkState();
 
             name += " -" + species.Name;
@@ -107,21 +109,29 @@ namespace EvolvingWilds {
         private void UpdateStats() {
             _health = Mathf.Clamp(_health, 0.0f, _species.GetStat(StatType.Health));
             _steering.Speed = _species.GetStat(StatType.MovementSpeed);
-            _senses.Range = _species.GetStat(StatType.Sight);
-        }
-
-        private void OnObjectEnterSight(WildsEntity entity) {
-            GenerateDecisions(entity);
-            RethinkState();
-        }
-
-        private void OnObjectLeaveSight(WildsEntity entity) {
-            RemoveDecisions(entity);
-            RethinkState();
+            _senseses.Range = _species.GetStat(StatType.Sight);
         }
 
         private void RethinkState() {
+
+            _decisions.Clear();
             
+            _decisions.Add(new State_Wander(this));
+            _decisions.Add(new State_Run(this));
+            
+            foreach (var creature in _senseses.GetVisibleCreatures()) {
+                if(creature.Species == _species) continue;
+                _decisions.Add(new State_Attack(this, creature));
+            }
+
+            foreach (var food in _senseses.GetVisibleFood()) {
+                _decisions.Add(new State_Eat(this, food));
+            }
+
+            if (_currentState != null && !_currentState.Done) {
+                _decisions.Add(_currentState);
+            }
+
             foreach (var decision in _decisions) {
                 decision.CalculateUtility();
             }
@@ -134,7 +144,7 @@ namespace EvolvingWilds {
                     bestState = creatureState;
                 }
             }
-
+            
             if (_currentState == bestState) {
                 return;
             }
@@ -146,35 +156,8 @@ namespace EvolvingWilds {
             _currentState = bestState;
             
             _currentState.Enter();
-        }
-        
-        private void GenerateDecisions(WildsEntity entity) {
-            if (entity is Creature) {
-                Creature creature = entity as Creature;
 
-                // TODO Add mating
-                
-                if (creature.Species == Species) {
-                    return;
-                }
-                
-                _decisions.Add(new State_Attack(this, creature));
-                _decisions.Add(new State_Run(this, creature));
-            }
-            else if (entity is Food) {
-                
-                Food food = entity as Food;
-                
-                _decisions.Add(new State_Eat(this, food));
-            }
-        }
-
-        private void RemoveDecisions(WildsEntity entity) {
-            for (int i = _decisions.Count - 1; i >= 1; i--) {
-                if (_decisions[i].Target == entity) {
-                    _decisions.RemoveAt(i);
-                }
-            }
+            _nextStateRethink = Time.time + STATE_RETHINK_INTERVAL + Random.Range(0.0f, STATE_RETHINK_INTERVAL);
         }
 
         private void Update() {
@@ -186,7 +169,7 @@ namespace EvolvingWilds {
 
             _currentState.Update();
 
-            if (_currentState.Done) {
+            if (_currentState.Done || Time.time >= _nextStateRethink) {
                 RethinkState();
             }
 
@@ -204,7 +187,7 @@ namespace EvolvingWilds {
             
             Destroy(this.gameObject);
 
-            Simulation.DeathCount++;
+            Simulation.Instance.CreatureDied(this);
         }
 
         // On Entity In Sight -> Rethink state

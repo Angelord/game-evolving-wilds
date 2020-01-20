@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Claw.AI.Steering {
@@ -5,12 +6,13 @@ namespace Claw.AI.Steering {
 
         private Transform target;
         private float decceleration = 1.0f;
+        private Vector2 toTarget;
 
         public Transform Target { get { return target; } set { target = value; } }
 
         public Vector2 CalculateForce(Vector2 targetPos) {
             
-            Vector2 toTarget = targetPos - (Vector2)transform.position;
+            toTarget = targetPos - (Vector2)transform.position;
 
             float distance = toTarget.magnitude;
 
@@ -35,6 +37,11 @@ namespace Claw.AI.Steering {
             }
 
             return CalculateForce(target.position);
+        }
+
+        private void OnDrawGizmosSelected() {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + (Vector3)toTarget);
         }
     }
 }

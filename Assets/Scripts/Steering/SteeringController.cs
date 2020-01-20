@@ -12,12 +12,17 @@ namespace Claw.AI.Steering {
         private Rigidbody2D rBody;
         private List<SteeringBehaviour> behaviours = new List<SteeringBehaviour>();
         private Vector2 accumForce;
+        private Vector2 lastVelocity;
         private World _world;
+        private Creature _creature;
 
         public float Speed { get { return speed; } set { speed = value; } }
+        
+        public Creature Creature => _creature;
 
         private void Start() {
             _world = World.Instance;
+            _creature = GetComponent<Creature>();
             rBody = GetComponent<Rigidbody2D>();
         }
 
@@ -89,10 +94,14 @@ namespace Claw.AI.Steering {
             
             Wrap();
 
-            if (rBody.velocity.sqrMagnitude < 0.15f) {
-                return;
+            if ((rBody.velocity - lastVelocity).sqrMagnitude > 0.1f) {
+                Flip();
             }
 
+            lastVelocity = rBody.velocity;
+        }
+
+        private void Flip() {
             if (rBody.velocity.x > 0.0f) {
                 transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
             }

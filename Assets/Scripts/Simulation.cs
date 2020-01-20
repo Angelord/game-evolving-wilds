@@ -27,6 +27,9 @@ namespace EvolvingWilds {
         private bool _paused;
         private int _speed;
 
+        public event Action<Creature> OnCreatureDestroyed;
+        public event Action<Food> OnFoodDestroyed;
+
         public static Simulation Instance { get { return _instance; } }
 
         public bool Paused {
@@ -54,7 +57,16 @@ namespace EvolvingWilds {
                 species.UpdateResearch();
             }
         }
-        
+
+        public void CreatureDied(Creature creature) {
+            OnCreatureDestroyed?.Invoke(creature);
+            DeathCount++;
+        }
+
+        public void FoodDestroyed(Food food) {
+            OnFoodDestroyed?.Invoke(food);
+        }
+
         public void IncreaseSpeed() {
             _speed = Mathf.Clamp(_speed + 1, 0, MAX_SPEED);
             Time.timeScale = Mathf.Pow(2.0f, _speed);

@@ -43,6 +43,7 @@
             <e p="Hide.cs" t="Include" />
             <e p="ObstacleAvoidance.cs" t="Include" />
             <e p="OffsetPursuit.cs" t="Include" />
+            <e p="PredatorAvoidance.cs" t="Include" />
             <e p="Pursuit.cs" t="Include" />
             <e p="Seek.cs" t="Include" />
             <e p="SteeringBehaviour.cs" t="Include" />

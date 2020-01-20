@@ -59,7 +59,7 @@ namespace EvolvingWilds {
 
 		public Species(string name) {
 			_name = name;
-			Color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
+			Color = new Color(Random.Range(0.4f, 1.0f), Random.Range(0.4f, 1.0f), Random.Range(0.4f, 1.0f));
 		}
 
 		public Species Clone(string cloneName) {

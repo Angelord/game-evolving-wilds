@@ -24,6 +24,7 @@ namespace EvolvingWilds {
             
             if (Calories <= 0.0f) {
                 Destroy(this.gameObject);
+                Simulation.Instance.FoodDestroyed(this);
                 return amount + Calories;
             }
 

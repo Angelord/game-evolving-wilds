@@ -4,51 +4,43 @@ using UnityEngine;
 namespace EvolvingWilds {
     public class State_Run : CreatureState {
 
-        private Creature _target;
-        private Flee _flee;
+        private PredatorAvoidance _predatorAvoidance;
         
-        public override WildsEntity Target { get { return _target; } }
-
-        public State_Run(Creature creature, Creature target) : base(creature) {
-            _target = target;
-        }
+        public State_Run(Creature creature) : base(creature) { }
         
         protected override float DoUtilityCalculation() {
 
-            if (!_target.Species.CanEat(FoodType.Meat)) {
-                return 0.0f;    // No point running from herbivores
-            }
-            
-            float distance = Vector2.Distance(_target.transform.position, Creature.transform.position);
+            float greatestThreat = 0.0f;
 
-            float value = 1.0f * (_target.DamagePerSecond / Creature.DamagePerSecond)
-                        + 0.6f * (Creature.Health / Species.GetStat(StatType.Health))
-                        + 0.6f * (1.0f - distance / (_target.Species.GetStat(StatType.Sight) * 3.0f));
-
-            if (IsCurrent && !Done) {
-                return value + 0.2f;
-            }
+            float healthPercent = Creature.Health / Species.GetStat(StatType.Health);
             
-            return value;
+            foreach (var threat in Senses.GetVisibleCreatures()) {
+                if(threat.Species == Species || !threat.Species.CanEat(FoodType.Meat)) continue;
+                
+                float distance = Vector2.Distance(threat.transform.position, Creature.transform.position);
+
+                float value = 1.0f * (threat.DamagePerSecond / Creature.DamagePerSecond)
+                              + 0.5f * healthPercent
+                              + 0.5f * (1.0f - distance / (threat.Species.GetStat(StatType.Sight) * 3.0f))
+                              - (Creature.Species.EaterType == EaterType.Herbivore ? 0.0f : 0.4f);
+
+                greatestThreat = Mathf.Max(value, greatestThreat);
+            }
+
+            return greatestThreat;
         }
 
         protected override void OnEnter() {
-            _flee = Steering.GetBehaviour<Flee>();
-            _flee.Target = _target.transform;
-            _flee.enabled = true;
+            _predatorAvoidance = Steering.GetBehaviour<PredatorAvoidance>();
+            _predatorAvoidance.enabled = true;
+            Debug.Log("Running");
         }
 
         protected override void OnExit() {
-            _flee.enabled = false;
+            _predatorAvoidance.enabled = false;
         }
 
         public override void Update() {
-
-            float distance = Vector2.Distance(_target.transform.position, Creature.transform.position);
-
-            if (distance > _target.Species.GetStat(StatType.Sight) * 3.0f) {
-                Done = true;
-            }
         }
     }
 }

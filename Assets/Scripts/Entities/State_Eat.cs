@@ -6,9 +6,7 @@ namespace EvolvingWilds {
 
         private Food _food;
         private Arrive _arrive;
-
-        public override WildsEntity Target { get { return _food; } }
-
+        
         public State_Eat(Creature creature, Food food) : base(creature) {
             _food = food;
         }
@@ -38,7 +36,7 @@ namespace EvolvingWilds {
             _arrive = Steering.GetBehaviour<Arrive>();
             _arrive.enabled = true;
             _arrive.Target = _food.transform;
-            _arrive.MoveToFront();
+//            _arrive.MoveToFront();
         }
 
         protected override void OnExit() {
@@ -51,7 +49,8 @@ namespace EvolvingWilds {
                 return;
             }
 
-            if (Vector2.Distance(Creature.transform.position, _food.transform.position) > Species.GetStat(StatType.Range)) {
+            float distanceToFood = Vector2.Distance(Creature.transform.position, _food.transform.position);
+            if (distanceToFood > Species.GetStat(StatType.Range)) {
                 _arrive.enabled = true;
                 return;
             }

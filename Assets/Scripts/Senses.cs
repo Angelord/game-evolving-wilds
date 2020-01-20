@@ -1,35 +1,65 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace EvolvingWilds {
     [RequireComponent(typeof(CircleCollider2D))]
     public class Senses : MonoBehaviour {
 
-        private List<WildsEntity> _objectsInRange = new List<WildsEntity>();
+        private List<Food> _visibleFood = new List<Food>();
+        public List<Creature> _visibleCreatures = new List<Creature>();
+        
+        public float Range { set { GetComponent<CircleCollider2D>().radius = value; } }
 
-        public List<WildsEntity> ObjectsInRange { get { return _objectsInRange; } }
+        public IEnumerable<Food> GetVisibleFood() {
+            return _visibleFood;
+        }
 
-        public event Action<WildsEntity> OnObjectEnterSight;
-        public event Action<WildsEntity> OnObjectLeaveSight;
+        public IEnumerable<Creature> GetVisibleCreatures() {
+            return _visibleCreatures;
+        }
 
-        public float Range {
-            set { GetComponent<CircleCollider2D>().radius = value; }
+        private void Start() {
+            Simulation.Instance.OnCreatureDestroyed += OnCreatureDestroyed;
+            Simulation.Instance.OnFoodDestroyed += OnFoodDestoryed;
+        }
+        
+        private void OnFoodDestoryed(Food food) {
+            if (_visibleFood.Contains(food)) {
+                _visibleFood.Remove(food);
+            }
+        }
+
+        private void OnCreatureDestroyed(Creature creature) {
+            if (_visibleCreatures.Contains(creature)) {
+                _visibleCreatures.Remove(creature);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other) {
             WildsEntity entity = other.gameObject.GetComponent<WildsEntity>();
-            _objectsInRange.Add(entity);
-            if (OnObjectEnterSight != null) {
-                OnObjectEnterSight(entity);
+            if(entity == null) return;
+            if (entity.gameObject == transform.parent.gameObject) return;
+
+            if (entity is Creature) {
+                _visibleCreatures.Add(entity as Creature);
+            }
+            else if (entity is Food) {
+                _visibleFood.Add(entity as Food);
             }
         }
 
         private void OnTriggerExit2D(Collider2D other) {
             WildsEntity entity = other.gameObject.GetComponent<WildsEntity>();
-            _objectsInRange.Remove(entity);
-            if (OnObjectLeaveSight != null) {
-                OnObjectLeaveSight(entity);
+            if(entity == null) return;
+            if (entity.gameObject == transform.parent.gameObject) return;
+
+            if (entity is Creature) {
+                _visibleCreatures.Remove(entity as Creature);
+            }
+            else if (entity is Food) {
+                _visibleFood.Remove(entity as Food);
             }
         }
     }

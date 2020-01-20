@@ -1,5 +1,6 @@
 
 using System;
+using EvolvingWilds;
 using UnityEngine;
 
 namespace Claw.AI.Steering {
@@ -22,7 +23,12 @@ namespace Claw.AI.Steering {
         }
 
         protected Rigidbody2D Rigidbody { get { return _rigidbody; } }
+        
         protected SteeringController Controller { get { return _controller; } }
+
+        protected Senses Senses { get { return _controller.Creature.Senses; } }
+
+        protected Creature Creature { get { return _controller.Creature; } }
 
         public void Initialize() {
             _rigidbody = GetComponent<Rigidbody2D>();

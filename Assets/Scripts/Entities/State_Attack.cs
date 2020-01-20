@@ -8,13 +8,12 @@ namespace EvolvingWilds {
         private Pursuit _pursuit;
         private float _lastAttack;
 
-        public override WildsEntity Target { get { return _target; } }
-        
+        public Creature Target => _target;
+
         public State_Attack(Creature creature, Creature target) : base(creature) {
             this._target = target;
         }
-
-
+        
         protected override float DoUtilityCalculation() {
             if (!Species.CanEat(FoodType.Meat)) {
                 return 0.0f;
