@@ -193,7 +193,7 @@ namespace EvolvingWilds {
             if (Calories >= Species.CalorieConsumption * 2) {
                 Debug.Log("Reproducing");
                 Calories /= 2.0f;
-                Simulation.Instance.Reproduce(transform.position, this);
+                Simulation.Instance.Reproduce(transform.position, _species);
             }
         }
 

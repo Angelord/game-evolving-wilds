@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Projects\Games\game-evolving-wilds" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="Bodypart.cs" t="Include" />
+          <e p="CreatureBuilder.cs" t="Include" />
+          <e p="CreatureJoint.cs" t="Include" />
+          <e p="EaterType.cs" t="Include" />
+          <e p="Effects" t="Include">
+            <e p="GrowOnStart.cs" t="Include" />
+            <e p="Shaker.cs" t="Include" />
+          </e>
+          <e p="Entities" t="Include">
+            <e p="Creature.cs" t="Include" />
+            <e p="CreatureState.cs" t="Include" />
+            <e p="Food.cs" t="Include" />
+            <e p="State_Attack.cs" t="Include" />
+            <e p="State_Eat.cs" t="Include" />
+            <e p="State_Run.cs" t="Include" />
+            <e p="State_Wander.cs" t="Include" />
+            <e p="Vegetation.cs" t="Include" />
+            <e p="WildsEntity.cs" t="Include" />
+          </e>
+          <e p="JointType.cs" t="Include" />
+          <e p="Mutations" t="Include">
+            <e p="BodypartMutation.cs" t="Include" />
+            <e p="HeadMutation.cs" t="Include" />
+            <e p="Mutation.cs" t="Include" />
+            <e p="TorsoMutation.cs" t="Include" />
+          </e>
+          <e p="Mutator.cs" t="Include" />
+          <e p="Senses.cs" t="Include" />
+          <e p="Simulation.cs" t="Include" />
+          <e p="Species.cs" t="Include" />
+          <e p="StatType.cs" t="Include" />
+          <e p="Steering" t="Include">
+            <e p="Arrive.cs" t="Include" />
+            <e p="Evade.cs" t="Include" />
+            <e p="Flee.cs" t="Include" />
+            <e p="Hide.cs" t="Include" />
+            <e p="ObstacleAvoidance.cs" t="Include" />
+            <e p="OffsetPursuit.cs" t="Include" />
+            <e p="Pursuit.cs" t="Include" />
+            <e p="Seek.cs" t="Include" />
+            <e p="SteeringBehaviour.cs" t="Include" />
+            <e p="SteeringController.cs" t="Include" />
+            <e p="Wander.cs" t="Include" />
+          </e>
+          <e p="Torso.cs" t="Include" />
+          <e p="UserInterface" t="Include">
+            <e p="SimulationControls.cs" t="Include" />
+          </e>
+          <e p="World.cs" t="Include" />
+        </e>
+      </e>
+      <e p="game-evolving-wilds.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+    <e p="C:\Users\Almoxis\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Almoxis\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_game-evolving-wilds.581221410.00" t="ExcludeRecursive" />
+  </component>
+</project>
