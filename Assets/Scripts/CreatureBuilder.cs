@@ -38,7 +38,13 @@ public class CreatureBuilder : MonoBehaviour {
 
         Bodypart newPart = Instantiate(partPrefab).GetComponent<Bodypart>();
         CreatureJoint creatureJoint = _torso.GetJoint(newPart.Joint);
+        if (creatureJoint.Bodypart != null) {
+            _bodyparts.Remove(creatureJoint.Bodypart);
+            Destroy(creatureJoint.Bodypart.gameObject);
+        }
+
         newPart.SetColor(_creature.Species.Color);
         newPart.Place(creatureJoint);
+        _bodyparts.Add(newPart);
     }
 }

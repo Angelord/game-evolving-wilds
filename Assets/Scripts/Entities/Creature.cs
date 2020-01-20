@@ -174,7 +174,6 @@ namespace EvolvingWilds {
             }
 
             if (Calories >= Species.CalorieConsumption * 2) {
-                Debug.Log("Reproducing");
                 Calories /= 2.0f;
                 Simulation.Instance.Reproduce(transform.position, _species);
             }
@@ -183,7 +182,10 @@ namespace EvolvingWilds {
         private void Die() {
             Food meat = Instantiate(meatPrefab, transform.position, Quaternion.identity).GetComponent<Food>();
 
-            meat.Calories = CorpseCalories; 
+            meat.Calories = CorpseCalories;
+
+            _species.OnMutationAdded -= OnMutationAdded;
+            _species.OnMutationRemoved -= OnMutationRemoved;
             
             Destroy(this.gameObject);
 

@@ -122,10 +122,12 @@ namespace EvolvingWilds {
 
 			_research.Update();
 			if (_research.IsDone()) {
-				if(OnResearchComplete != null)
-					OnResearchComplete(this, _research.Mutation);
-				AddMutation(_research.Mutation);
+				Debug.Log("Research complete!");
+				Mutation newMutation = _research.Mutation;
 				_research = null;
+				if(OnResearchComplete != null)
+					OnResearchComplete(this, newMutation);
+				AddMutation(newMutation);
 			}
 		}
 	}

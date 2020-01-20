@@ -12,7 +12,6 @@ namespace Claw.AI.Steering {
         private Rigidbody2D rBody;
         private List<SteeringBehaviour> behaviours = new List<SteeringBehaviour>();
         private Vector2 accumForce;
-        private Vector2 lastVelocity;
         private World _world;
         private Creature _creature;
 
@@ -94,11 +93,9 @@ namespace Claw.AI.Steering {
             
             Wrap();
 
-            if ((rBody.velocity - lastVelocity).sqrMagnitude > 0.1f) {
+            if (Mathf.Abs(rBody.velocity.x) >= 0.5f * Speed) {
                 Flip();
             }
-
-            lastVelocity = rBody.velocity;
         }
 
         private void Flip() {

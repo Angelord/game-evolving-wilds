@@ -125,7 +125,7 @@ namespace EvolvingWilds {
         private void BeginRandomResearch(Species species) {
             
             List<Mutation> missingMutations = AllMutations.Where(mutation => !species.HasMutation(mutation)).ToList();
-
+            
             if(missingMutations.Count == 0) return;
 
             Mutation newMutation = missingMutations[Random.Range(0, missingMutations.Count)];

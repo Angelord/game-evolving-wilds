@@ -3,19 +3,20 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 974f7370a4b747f4979ecd780dd8ff4e, type: 3}
-  m_Name: Legs
+  m_Name: Legs_1
   m_EditorClassIdentifier: 
   Name: Legs
   Icon: {fileID: 21300000, guid: 14b136be36e92493ab7707a13d7f212b, type: 3}
-  ResearchTime: 80
+  ResearchTime: 5
   CalorieConsumption: 10
   Prerequisites: []
   Incompatibles: []
   Modifiers: []
-  Bodypart: {fileID: 1209211759707818, guid: 7b96452f9a0c04f87883bb65069c1460, type: 2}
+  Bodypart: {fileID: 1209211759707818, guid: 7b96452f9a0c04f87883bb65069c1460, type: 3}

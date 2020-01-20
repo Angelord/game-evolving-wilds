@@ -33,7 +33,6 @@ namespace EvolvingWilds {
         protected override void OnEnter() {
             _predatorAvoidance = Steering.GetBehaviour<PredatorAvoidance>();
             _predatorAvoidance.enabled = true;
-            Debug.Log("Running");
         }
 
         protected override void OnExit() {
