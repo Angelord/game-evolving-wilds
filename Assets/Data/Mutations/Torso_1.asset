@@ -17,6 +17,6 @@ MonoBehaviour:
   ResearchTime: 5
   CalorieConsumption: 20
   Prerequisites: []
-  Incompatibles: []
+  Category: {fileID: 11400000, guid: 00924a4fa29ec954091cb8f05190b540, type: 2}
   Modifiers: []
   Torso: {fileID: 1016509767114396, guid: 99d7adbb7e5c54f8f9aeec047f674d8c, type: 3}

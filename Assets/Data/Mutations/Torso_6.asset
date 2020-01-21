@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de23b3cdb41846818842318e36376a94, type: 3}
-  m_Name: Torso_7
+  m_Name: Torso_6
   m_EditorClassIdentifier: 
   Name: Torso
   Icon: {fileID: 21300000, guid: 0b62cd9acf1b84b0a99a950af0337aeb, type: 3}
   ResearchTime: 5
   CalorieConsumption: 20
   Prerequisites: []
-  Incompatibles: []
+  Category: {fileID: 11400000, guid: 00924a4fa29ec954091cb8f05190b540, type: 2}
   Modifiers: []
-  Torso: {fileID: 1016509767114396, guid: 0e819d850103cae4d90878382ea05e0a, type: 3}
+  Torso: {fileID: 1016509767114396, guid: 47d4ff80eb267fa4e863458d532a88a0, type: 3}

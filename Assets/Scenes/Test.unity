@@ -438,8 +438,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialSpawn: 19
-  MinSpawnRate: 3
-  MaxSpawnRate: 10
+  MinSpawnRate: 1
+  MaxSpawnRate: 4
   prefabs:
   - {fileID: 1863135572053894, guid: f3232cdc90cd940cc862351ba843366e, type: 3}
   - {fileID: 1033218014834312, guid: a41bc61138f944164bacc5c741ededcf, type: 3}

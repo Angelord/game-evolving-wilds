@@ -8,8 +8,8 @@ namespace EvolvingWilds {
         public float ResearchTime;
         public float CalorieConsumption;
         public Mutation[] Prerequisites;
-        public Mutation[] Incompatibles;
-		
+        public MutationCategory Category;
+        
         public StatModifier[] Modifiers;
         
         public void ModifyStat(StatType stat, ref float value) {
@@ -21,11 +21,15 @@ namespace EvolvingWilds {
         }
 
         public virtual void OnAddToSpecies(Species species) {
-            // Remove any non-compatible mutations
-            foreach (Mutation mutation in Incompatibles) {
-                if(!species.HasMutation(mutation)) continue;
-                species.RemoveMutation(mutation);
-            }	
+
+            if (Category == null) return;
+
+            for (int i = species.MutationCount - 1; i >= 0; i--) {
+                Mutation mutation = species.GetMutation(i);
+                if (mutation.Category == Category) {
+                    species.RemoveMutation(mutation);
+                }
+            }
         }
 
         public virtual void OnRemoveFromSpecies(Species species) {

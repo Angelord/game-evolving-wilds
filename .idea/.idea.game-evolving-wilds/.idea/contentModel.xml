@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Projects\Games\game-evolving-wilds" t="IncludeRecursive">
@@ -29,6 +29,7 @@
             <e p="BodypartMutation.cs" t="Include" />
             <e p="HeadMutation.cs" t="Include" />
             <e p="Mutation.cs" t="Include" />
+            <e p="MutationCategory.cs" t="Include" />
             <e p="TorsoMutation.cs" t="Include" />
           </e>
           <e p="Mutator.cs" t="Include" />

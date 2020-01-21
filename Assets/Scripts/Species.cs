@@ -39,9 +39,9 @@ namespace EvolvingWilds {
 		private EaterType _eaterType;
 		private string _name;
 		
-		private List<Mutation> _mutations = new List<Mutation>();
 		private MutationResearch _research;
 
+		public List<Mutation> Mutations = new List<Mutation>();
 		public event Action<Species, Mutation> OnResearchComplete;
 		public event Action<Mutation> OnMutationAdded;
 		public event Action<Mutation> OnMutationRemoved;
@@ -51,7 +51,7 @@ namespace EvolvingWilds {
 
 		public float CalorieConsumption { get { return _calorieConsumption; } }
 
-		public int MutationCount { get { return _mutations.Count; } }
+		public int MutationCount { get { return Mutations.Count; } }
 
 		public EaterType EaterType { get { return _eaterType; } set { _eaterType = value; } }
 
@@ -65,7 +65,7 @@ namespace EvolvingWilds {
 		public Species Clone(string cloneName) {
 			Species clone = new Species(cloneName);
 			clone._calorieConsumption = _calorieConsumption;
-			clone._mutations = new List<Mutation>(_mutations);
+			clone.Mutations = new List<Mutation>(Mutations);
 			return clone;
 		}
 
@@ -76,16 +76,16 @@ namespace EvolvingWilds {
 		}
 
 		public Mutation GetMutation(int index) {
-			return _mutations[index];
+			return Mutations[index];
 		}
 
 		public bool HasMutation(Mutation mutation) {
-			return _mutations.Contains(mutation);
+			return Mutations.Contains(mutation);
 		}
 
 		public void AddMutation(Mutation mutation) {
 			mutation.OnAddToSpecies(this);
-			_mutations.Add(mutation);
+			Mutations.Add(mutation);
 			_calorieConsumption += mutation.CalorieConsumption;
 			
 			if (OnMutationAdded != null) {
@@ -95,7 +95,7 @@ namespace EvolvingWilds {
 
 		public void RemoveMutation(Mutation mutation) {
 			mutation.OnRemoveFromSpecies(this);
-			_mutations.Remove(mutation);
+			Mutations.Remove(mutation);
 			_calorieConsumption -= mutation.CalorieConsumption;
 			
 			if (OnMutationRemoved != null) {
@@ -106,7 +106,7 @@ namespace EvolvingWilds {
 		public float GetStat(StatType type) {
 			float value = BASE_STATS[(int) type];
 
-			foreach (var mutation in _mutations) {
+			foreach (var mutation in Mutations) {
 				mutation.ModifyStat(type, ref value);
 			}
 
@@ -122,7 +122,6 @@ namespace EvolvingWilds {
 
 			_research.Update();
 			if (_research.IsDone()) {
-				Debug.Log("Research complete!");
 				Mutation newMutation = _research.Mutation;
 				_research = null;
 				if(OnResearchComplete != null)

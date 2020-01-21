@@ -12,6 +12,7 @@ public class Bodypart : MonoBehaviour {
         transform.SetParent(creatureJoint.Transform);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+        transform.localScale = Vector3.one;
         creatureJoint.Bodypart = this;
     }
 }
