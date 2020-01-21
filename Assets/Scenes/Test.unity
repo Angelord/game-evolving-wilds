@@ -437,9 +437,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f1a06a15ae641a588b75d0439733d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialSpawn: 19
-  MinSpawnRate: 0.2
-  MaxSpawnRate: 4
+  InitialSpawn: 50
+  MinSpawnRate: 0.1
+  MaxSpawnRate: 3.5
   prefabs:
   - {fileID: 1863135572053894, guid: f3232cdc90cd940cc862351ba843366e, type: 3}
   - {fileID: 1033218014834312, guid: a41bc61138f944164bacc5c741ededcf, type: 3}
@@ -1022,8 +1022,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MinSize: 5
-  MaxSize: 13
-  ZoomSpeed: 140
+  MaxSize: 12.5
+  ZoomSpeed: 300
+  PanSpeed: 20
+  World: {fileID: 335812049}
 --- !u!1 &2144331045
 GameObject:
   m_ObjectHideFlags: 0
