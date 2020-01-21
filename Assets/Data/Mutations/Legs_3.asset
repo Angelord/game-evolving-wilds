@@ -18,5 +18,7 @@ MonoBehaviour:
   CalorieConsumption: 10
   Prerequisites: []
   Category: {fileID: 11400000, guid: c099ae7be02749f4994f5fa51c1d351d, type: 2}
-  Modifiers: []
+  Modifiers:
+  - Stat: 6
+    Value: 1
   Bodypart: {fileID: 1209211759707818, guid: db873c8ba471a6044a0ddf662f96c3f1, type: 3}

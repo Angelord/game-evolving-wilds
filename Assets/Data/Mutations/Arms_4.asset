@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Claws
   Icon: {fileID: 21300000, guid: 36e8dd758d87c4be2ba2e5140fb3dc5a, type: 3}
   ResearchTime: 80
-  CalorieConsumption: 20
+  CalorieConsumption: 60
   Prerequisites: []
   Category: {fileID: 11400000, guid: c9efdbb3b975eae46a2ce01e78c26d6e, type: 2}
   Modifiers:

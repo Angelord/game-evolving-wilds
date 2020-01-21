@@ -15,9 +15,11 @@ MonoBehaviour:
   Name: Head
   Icon: {fileID: 21300000, guid: ec27410fd298546a99c1b5065a96bfc7, type: 3}
   ResearchTime: 5
-  CalorieConsumption: 30
+  CalorieConsumption: 60
   Prerequisites: []
   Category: {fileID: 11400000, guid: 42983fe7c055a2744aba2b5b346126c0, type: 2}
-  Modifiers: []
+  Modifiers:
+  - Stat: 7
+    Value: 2
   Bodypart: {fileID: 1362746165916350, guid: b3a13032361094d9b8f496f18f17d941, type: 3}
   Type: 2

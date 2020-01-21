@@ -35,7 +35,7 @@ namespace EvolvingWilds {
 			3.0f, // Sight
 			0.5f // Range
 		};
-		private float _calorieConsumption = 100.0f;
+		private float _calorieConsumption = 0.0f;
 		private EaterType _eaterType;
 		private string _name;
 		

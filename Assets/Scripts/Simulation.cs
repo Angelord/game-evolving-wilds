@@ -13,15 +13,16 @@ namespace EvolvingWilds {
 
         public static int DeathCount = 0;
         
-        public Mutation[] HerbivoreStartingMutations;
-        public Mutation[] CarnivoreStartingMutations;
         public Mutation[] AllMutations;
         public int BiomassPerStartingSpecies;
         public int NumStartingHerbivores;
         public int NumStartingCarnivores;
+        public float StartingHerbivoreLimit;
+        public float StartingCarnivoreLimit;
         public List<Species> Species = new List<Species>();
         public GameObject CreaturePrefab;
 
+        private List<Mutation> _torsos; // For quick lookup
         private static Simulation _instance;
         private World _world;
         private bool _paused;
@@ -86,35 +87,61 @@ namespace EvolvingWilds {
         }
 
         private void PlaceStarting() {
+
+            _torsos = AllMutations.Where(mutation => mutation is TorsoMutation).ToList();
             
             for (int i = 0; i < NumStartingHerbivores; i++) {
-                PlaceInitialSpecies(HerbivoreStartingMutations);   
+                PlaceInitialSpecies(GenerateInitialSpecies(EaterType.Herbivore, StartingHerbivoreLimit));   
             }
             
             for (int i = 0; i < NumStartingCarnivores; i++) {
-                PlaceInitialSpecies(CarnivoreStartingMutations);   
+                PlaceInitialSpecies(GenerateInitialSpecies(EaterType.Carnivore, StartingCarnivoreLimit));   
             }
         }
-        
-        private void PlaceInitialSpecies(Mutation[] startingMutations) {
-            // TODO : Generate names randomly
-            Species newSpecies = new Species("Species ");
-                
-            Species.Add(newSpecies);
 
-            foreach (var mutation in startingMutations) {
-                newSpecies.AddMutation(mutation);
+        private Species GenerateInitialSpecies(EaterType eaterType, float calorieLimit) {
+            
+            List<Mutation> heads = AllMutations.Where(mutation => {
+                HeadMutation head = mutation as HeadMutation;
+                return head != null && head.Type == eaterType;
+            }).ToList();
+            
+            List<Mutation> remainingMutations = AllMutations.Where(mutation => {
+                return (!(mutation is HeadMutation) && !(mutation is TorsoMutation));
+            }).ToList();
+            
+            Species newSpecies = new Species("Species");
+            
+            newSpecies.AddMutation(_torsos[Random.Range(0, _torsos.Count)]);
+            newSpecies.AddMutation(heads[Random.Range(0, heads.Count)]);
+            
+            while (remainingMutations.Count > 0 && newSpecies.CalorieConsumption < calorieLimit) {
+
+                Mutation newMutation = remainingMutations[Random.Range(0, remainingMutations.Count)];
+                
+                newSpecies.AddMutation(newMutation);
+
+                for (int i = remainingMutations.Count - 1; i >= 0; i--) {
+                    MutationCategory category = remainingMutations[i].Category;
+                    if (category != null && category == newMutation.Category) {
+                        remainingMutations.RemoveAt(i);
+                    }
+                }
             }
             
             newSpecies.OnResearchComplete += OnResearchComplete;
-            
             BeginRandomResearch(newSpecies);
 
-            float spawnCount = Mathf.RoundToInt(BiomassPerStartingSpecies / newSpecies.CalorieConsumption);
+            return newSpecies;
+        }
+
+        private void PlaceInitialSpecies(Species initialSpecies) {
+
+            float spawnCount = Mathf.RoundToInt(BiomassPerStartingSpecies / initialSpecies.CalorieConsumption);
             
             for (int i = 0; i < spawnCount; i++) {
                 Creature creature = Instantiate(CreaturePrefab, _world.RandomPosition(), Quaternion.identity).GetComponent<Creature>();
-                creature.Initialize(newSpecies);
+                creature.Initialize(initialSpecies);
             }
         }
 
