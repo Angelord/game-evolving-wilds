@@ -11,7 +11,7 @@ public class CameraControl : MonoBehaviour {
     public float ZoomSpeed = 1.0f;
     public float PanSpeed = 12.0f;
     public World World;
-    [Range(0.01f, 0.3f)]private float PanMargin;
+    [Range(0.01f, 0.3f)]public float PanMargin;
     private Camera _camera;
 
 

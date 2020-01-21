@@ -58,6 +58,10 @@ namespace EvolvingWilds {
             foreach (var species in Species) {
                 species.UpdateResearch();
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                Application.Quit();
+            }
         }
 
         public void CreatureDied(Creature creature) {

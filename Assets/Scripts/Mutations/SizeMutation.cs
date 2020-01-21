@@ -8,14 +8,14 @@ namespace EvolvingWilds {
         
         public override void Apply(Creature creature) {
             Vector3 localScale = creature.transform.localScale;
-            localScale.x += GrowAmount;
+            localScale.x = Mathf.Sign(localScale.x) * (Mathf.Abs(localScale.x) + GrowAmount);
             localScale.y += GrowAmount;
             creature.transform.localScale = localScale;
         }
 
         public override void Unapply(Creature creature) {
             Vector3 localScale = creature.transform.localScale;
-            localScale.x -= GrowAmount;
+            localScale.x = Mathf.Sign(localScale.x) * (Mathf.Abs(localScale.x) - GrowAmount);
             localScale.y -= GrowAmount;
             creature.transform.localScale = localScale;
         }

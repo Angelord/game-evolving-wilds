@@ -25,5 +25,5 @@ MonoBehaviour:
   - Stat: 4
     Value: -30
   - Stat: 7
-    Value: -0.8
-  GrowAmount: -0.8
+    Value: -0.7
+  GrowAmount: -0.7

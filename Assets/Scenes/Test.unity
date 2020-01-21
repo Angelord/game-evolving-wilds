@@ -1026,6 +1026,7 @@ MonoBehaviour:
   ZoomSpeed: 300
   PanSpeed: 20
   World: {fileID: 335812049}
+  PanMargin: 0.1
 --- !u!1 &2144331045
 GameObject:
   m_ObjectHideFlags: 0
