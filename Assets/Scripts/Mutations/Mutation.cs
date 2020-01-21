@@ -20,7 +20,17 @@ namespace EvolvingWilds {
             }
         }
 
-        public virtual void OnAddToSpecies(Species species) {
+        public bool CanObtain(Species species) {
+            if (species.HasMutation(this)) return false;
+
+            foreach (var prerequisite in Prerequisites) {
+                if (!species.HasMutation(prerequisite)) return false;
+            }
+
+            return true;
+        }
+
+        public virtual void BeforeAddToSpecies(Species species) {
 
             if (Category == null) return;
 
@@ -32,7 +42,7 @@ namespace EvolvingWilds {
             }
         }
 
-        public virtual void OnRemoveFromSpecies(Species species) {
+        public virtual void BeforeRemoveFromSpecies(Species species) {
             // Remove any mutations that are prerequisites for us
             for (int i = species.MutationCount - 1; i >= 0; i--) {
                 Mutation mutation = species.GetMutation(i);

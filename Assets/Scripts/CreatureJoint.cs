@@ -4,5 +4,4 @@ using UnityEngine;
 public class CreatureJoint {
     public Transform Transform;
     public JointType Type;
-    public Bodypart Bodypart;
 }

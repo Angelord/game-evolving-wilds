@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa31dc8dee34407c95594eab99a64466, type: 3}
+  m_Name: Shrink_1
+  m_EditorClassIdentifier: 
+  Name: 
+  Icon: {fileID: 0}
+  ResearchTime: 5
+  CalorieConsumption: -20
+  Prerequisites: []
+  Category: {fileID: 11400000, guid: 092c82329d631904a94de1da2f3b027f, type: 2}
+  Modifiers:
+  - Stat: 0
+    Value: 0.2
+  - Stat: 4
+    Value: -10
+  - Stat: 7
+    Value: -0.5
+  GrowAmount: -0.3

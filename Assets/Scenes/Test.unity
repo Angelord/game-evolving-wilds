@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialSpawn: 19
-  MinSpawnRate: 1
+  MinSpawnRate: 0.2
   MaxSpawnRate: 4
   prefabs:
   - {fileID: 1863135572053894, guid: f3232cdc90cd940cc862351ba843366e, type: 3}
@@ -463,6 +463,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e3c5446700bac4a4eab0f50c6153a814, type: 2}
   - {fileID: 11400000, guid: d55d4d04f166645f68b86993bbcdb3b3, type: 2}
   - {fileID: 11400000, guid: 1447d42c4763dca409bbad6359cd128e, type: 2}
+  - {fileID: 11400000, guid: 8beb8b7f784b5ac46bb526190e49c862, type: 2}
+  - {fileID: 11400000, guid: b6ea67de09abc444c9786d58530752e7, type: 2}
+  - {fileID: 11400000, guid: 5bec98d3e40e7a54cbb2eecbe2c87b2e, type: 2}
   - {fileID: 11400000, guid: 86d6b526e0eae496199fef1c3cc4a9fb, type: 2}
   - {fileID: 11400000, guid: 97fc938c152b74681a54e21fb81309d2, type: 2}
   - {fileID: 11400000, guid: 955571ae087adee4aa81c39902e36a5e, type: 2}
@@ -477,6 +480,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 33924720b23d0474cb340a3b33f86eb6, type: 2}
   - {fileID: 11400000, guid: 5709b61557af2ad45b40eded58a72e78, type: 2}
   - {fileID: 11400000, guid: d8014649fc4a1884aa9d0d51ba5cfe34, type: 2}
+  - {fileID: 11400000, guid: 57e31ee722cd973469c5aa2e6bfce3ac, type: 2}
+  - {fileID: 11400000, guid: 38c3236fa8e2c6844a4e28fe0644ab00, type: 2}
+  - {fileID: 11400000, guid: b2946a11bf55a3a4386b63f0ef0ada2c, type: 2}
   - {fileID: 11400000, guid: 495a8f33c849047e3bf3a729f90ef2ab, type: 2}
   - {fileID: 11400000, guid: 782f77c78f9ab4b74bbcaa972c105c78, type: 2}
   - {fileID: 11400000, guid: 3ff28b7f651cc564890f6646fa526d9c, type: 2}

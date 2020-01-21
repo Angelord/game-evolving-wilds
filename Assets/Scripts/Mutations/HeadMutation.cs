@@ -6,8 +6,8 @@ namespace EvolvingWilds {
         
         public EaterType Type;
 
-        public override void OnAddToSpecies(Species species) {
-            base.OnAddToSpecies(species);
+        public override void BeforeAddToSpecies(Species species) {
+            base.BeforeAddToSpecies(species);
             species.EaterType = Type;
         }
     }

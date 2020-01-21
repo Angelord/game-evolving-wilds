@@ -21,7 +21,5 @@ MonoBehaviour:
   Modifiers:
   - Stat: 7
     Value: 2
-  - Stat: 6
-    Value: 1
   Bodypart: {fileID: 1362746165916350, guid: b3a13032361094d9b8f496f18f17d941, type: 3}
   Type: 2

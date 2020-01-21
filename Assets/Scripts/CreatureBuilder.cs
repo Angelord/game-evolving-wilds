@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using EvolvingWilds;
 using UnityEngine;
 
@@ -35,16 +36,26 @@ public class CreatureBuilder : MonoBehaviour {
     }
 
     public void SetBodypart(GameObject partPrefab) {
-
+        _creature = GetComponent<Creature>();
+        
         Bodypart newPart = Instantiate(partPrefab).GetComponent<Bodypart>();
-        CreatureJoint creatureJoint = _torso.GetJoint(newPart.Joint);
-        if (creatureJoint.Bodypart != null) {
-            _bodyparts.Remove(creatureJoint.Bodypart);
-            Destroy(creatureJoint.Bodypart.gameObject);
+
+        if (_torso != null) {
+            CreatureJoint creatureJoint = _torso.GetJoint(newPart.Joint);
+            newPart.Place(creatureJoint);
         }
 
         newPart.SetColor(_creature.Species.Color);
-        newPart.Place(creatureJoint);
         _bodyparts.Add(newPart);
+    }
+
+    public void RemoveBodypart(JointType jointType) {
+        for(int i = _bodyparts.Count - 1; i >= 0; i--) {
+            if (_bodyparts[i].Joint == jointType) {
+                Destroy(_bodyparts[i].gameObject);
+                _bodyparts.RemoveAt(i);
+                return;
+            }
+        }
     }
 }

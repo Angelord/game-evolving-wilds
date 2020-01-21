@@ -36,7 +36,7 @@ namespace EvolvingWilds {
 			3.0f, // Sight
 			0.5f // Range
 		};
-		private float _calorieConsumption = 0.0f;
+		private float _calorieConsumption = 50.0f;
 		private EaterType _eaterType;
 		private string _name;
 		
@@ -65,8 +65,9 @@ namespace EvolvingWilds {
 
 		public Species Clone(string cloneName) {
 			Species clone = new Species(cloneName);
-			clone._calorieConsumption = _calorieConsumption;
-			clone.Mutations = new List<Mutation>(Mutations);
+			foreach (var mutation in Mutations) {
+				clone.AddMutation(mutation);
+			}
 			return clone;
 		}
 
@@ -85,7 +86,7 @@ namespace EvolvingWilds {
 		}
 
 		public void AddMutation(Mutation mutation) {
-			mutation.OnAddToSpecies(this);
+			mutation.BeforeAddToSpecies(this);
 			Mutations.Add(mutation);
 			_calorieConsumption += mutation.CalorieConsumption;
 			
@@ -95,7 +96,7 @@ namespace EvolvingWilds {
 		}
 
 		public void RemoveMutation(Mutation mutation) {
-			mutation.OnRemoveFromSpecies(this);
+			mutation.BeforeRemoveFromSpecies(this);
 			Mutations.Remove(mutation);
 			_calorieConsumption -= mutation.CalorieConsumption;
 			

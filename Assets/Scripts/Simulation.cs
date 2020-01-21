@@ -140,6 +140,7 @@ namespace EvolvingWilds {
             }
             
             newSpecies.OnResearchComplete += OnResearchComplete;
+            Species.Add(newSpecies);
             BeginRandomResearch(newSpecies);
 
             return newSpecies;
@@ -161,11 +162,11 @@ namespace EvolvingWilds {
 
         private void BeginRandomResearch(Species species) {
             
-            List<Mutation> missingMutations = AllMutations.Where(mutation => !species.HasMutation(mutation)).ToList();
+            List<Mutation> availableMutations = AllMutations.Where(mutation => mutation.CanObtain(species)).ToList();
             
-            if(missingMutations.Count == 0) return;
+            if(availableMutations.Count == 0) return;
 
-            Mutation newMutation = missingMutations[Random.Range(0, missingMutations.Count)];
+            Mutation newMutation = availableMutations[Random.Range(0, availableMutations.Count)];
             
             species.BeginResearch(newMutation);
         }

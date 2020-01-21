@@ -9,5 +9,9 @@ namespace EvolvingWilds {
         public override void Apply(Creature creature) {
             creature.Builder.SetBodypart(Bodypart);
         }
+
+        public override void Unapply(Creature creature) {
+            creature.Builder.RemoveBodypart(Bodypart.GetComponent<Bodypart>().Joint);
+        }
     }
 }

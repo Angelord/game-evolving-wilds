@@ -99,12 +99,15 @@ namespace Claw.AI.Steering {
         }
 
         private void Flip() {
+            Vector3 localScale = transform.localScale;
             if (rBody.velocity.x > 0.0f) {
-                transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+                localScale.x = -1 * Mathf.Abs(localScale.x);
             }
             else {
-                transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+                localScale.x = Mathf.Abs(localScale.x);
             }
+
+            transform.localScale = localScale;
         }
 
         private bool AccumulateForce(Vector2 toAdd) {
