@@ -12,7 +12,8 @@ namespace EvolvingWilds {
         private const int MAX_SPEED = 4;
 
         public static int DeathCount = 0;
-        
+
+        [Range(0.0f, 1.0f)]public float NewSpeciesChance = 0.5f;
         public Mutation[] AllMutations;
         public int BiomassPerStartingSpecies;
         public int NumStartingHerbivores;
@@ -80,10 +81,19 @@ namespace EvolvingWilds {
 
         public void Reproduce(Vector2 position, Species species) {
             // TODO : Random chance to create new species 
+
+            Species childSpecies = species;
             
-            Vector2 childOffset = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * species.GetStat(StatType.Range);
+            float newSpeciesRn = Random.Range(0.0f, 1.0f);
+            if (newSpeciesRn < NewSpeciesChance) {
+                childSpecies = species.Clone("Child");
+                childSpecies.OnResearchComplete += OnResearchComplete;
+                Species.Add(childSpecies);
+            }
+
+            Vector2 childOffset = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * species.GetStat(StatType.Range) * 1.5f;
             Creature child = Instantiate(CreaturePrefab, position + childOffset, Quaternion.identity).GetComponent<Creature>();
-            child.Initialize(species);
+            child.Initialize(childSpecies);
         }
 
         private void PlaceStarting() {

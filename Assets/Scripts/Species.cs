@@ -4,6 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace EvolvingWilds {
+	[System.Serializable]
 	public class Species {
 		
 		public class MutationResearch {

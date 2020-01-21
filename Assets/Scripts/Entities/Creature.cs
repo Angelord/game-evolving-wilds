@@ -15,7 +15,7 @@ namespace EvolvingWilds {
 
         public GameObject meatPrefab;
         
-        private Species _species;
+        public Species _species;
         private SteeringController _steering;
         private Senses _senseses;
         private CircleCollider2D _collider;

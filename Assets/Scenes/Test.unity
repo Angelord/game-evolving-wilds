@@ -456,6 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959faa567624e43b3911a1fa3b911d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NewSpeciesChance: 0.5
   AllMutations:
   - {fileID: 11400000, guid: e49362fb4bed34dc0bca37f692d666e7, type: 2}
   - {fileID: 11400000, guid: dba73bbe288986d4d8c9978324e3afc6, type: 2}
@@ -485,10 +486,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f30e06950d9db44490514a2d9d50ba5, type: 2}
   - {fileID: 11400000, guid: 5551bbb8affd59d4db4d40b8e675f52d, type: 2}
   BiomassPerStartingSpecies: 600
-  NumStartingHerbivores: 3
+  NumStartingHerbivores: 2
   NumStartingCarnivores: 1
   StartingHerbivoreLimit: 80
   StartingCarnivoreLimit: 240
+  Species: []
   CreaturePrefab: {fileID: 1047355568363352, guid: f26391251720e476f820cf09fbf51c40,
     type: 3}
 --- !u!114 &335812053
