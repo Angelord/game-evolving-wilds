@@ -6,6 +6,7 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="Bodypart.cs" t="Include" />
+          <e p="CameraControl.cs" t="Include" />
           <e p="CreatureBuilder.cs" t="Include" />
           <e p="CreatureJoint.cs" t="Include" />
           <e p="EaterType.cs" t="Include" />
