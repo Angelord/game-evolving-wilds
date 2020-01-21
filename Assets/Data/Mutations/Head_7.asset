@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22c19ae3f9574faeb25e376d6290526c, type: 3}
-  m_Name: Head_Rabbit
+  m_Name: Head_7
   m_EditorClassIdentifier: 
   Name: Head
   Icon: {fileID: 21300000, guid: ec27410fd298546a99c1b5065a96bfc7, type: 3}
   ResearchTime: 5
-  CalorieConsumption: 100
+  CalorieConsumption: 80
   Prerequisites: []
-  Category: {fileID: 0}
+  Category: {fileID: 11400000, guid: 42983fe7c055a2744aba2b5b346126c0, type: 2}
   Modifiers: []
-  Bodypart: {fileID: 1620732083975662, guid: a9789380433d44620b0cc78774277666, type: 3}
-  Type: 2
+  Bodypart: {fileID: 1362746165916350, guid: fd8ca6b3db29be24296c46cd7148d4b3, type: 3}
+  Type: 0
